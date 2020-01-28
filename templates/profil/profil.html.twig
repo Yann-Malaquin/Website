@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+{{ encore_entry_link_tags('css/input') }}
+
+<div class="profil">
+    {{ form_start(formProfil) }}
+    <div>
+        {{ form_label(formProfil.firstname, 'Prénom', {'label_attr': {'class': 'input-left'} } ) }}
+        {{ form_widget(formProfil.firstname, { 'attr': {'class': 'input-left'}} ) }}
+    
+        {{ form_label(formProfil.name, 'Nom') }}
+        {{ form_widget(formProfil.name, { 'attr': {'class': 'input-right'} }) }}
+    </div>
+
+    <div>
+        {{ form_label(formProfil.email, 'Email', {'label_attr': {'class': 'label-left'} } )}}
+        {{ form_widget(formProfil.email, { 'attr': {'class': 'input-left'} }) }}
+
+        {{ form_label(formProfil.phone, 'Téléphone' )}}
+        {{ form_widget(formProfil.phone, { 'attr': {'class': 'input-right'} }) }}
+    </div>
+
+    <div>
+        {{ form_label(formProfil.notificationmail, 'Voulez-vous recevoir une notification par mail ?' ) }}
+        {{ form_widget(formProfil.notificationmail)}}
+
+        {{ form_label(formProfil.notificationsms, 'Voulez-vous recevoir une notification par sms ?' ) }}
+        {{ form_widget(formProfil.notificationsms) }}
+    </div>
+
+    <div>
+        <button type="submit" class ="btn btn-success">Modifier</button>
+    </div>
+
+    {{ form_end(formProfil) }}
+
+</div>
+
+{% endblock %}
