@@ -47,6 +47,16 @@ class User implements UserInterface
      */
     public $confirm_password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $key;
+
+    /**
+     * @ORM\Column(type="integer", options={"default":0})
+     */
+    private $activate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,5 +106,29 @@ class User implements UserInterface
     }
 
     public function eraseCredentials(){
+    }
+
+    public function getKey(): ?string
+    {
+        return $this->key;
+    }
+
+    public function setKey(string $key): self
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    public function getActivate(): ?int
+    {
+        return $this->activate;
+    }
+
+    public function setActivate(int $activate): self
+    {
+        $this->activate = $activate;
+
+        return $this;
     }
 }
