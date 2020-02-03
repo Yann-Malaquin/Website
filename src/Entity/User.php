@@ -50,7 +50,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $key;
+    private $cle;
 
     /**
      * @ORM\Column(type="integer", options={"default":0})
@@ -108,14 +108,14 @@ class User implements UserInterface
     public function eraseCredentials(){
     }
 
-    public function getKey(): ?string
+    public function getCle(): ?string
     {
-        return $this->key;
+        return $this->cle;
     }
 
-    public function setKey(string $key): self
+    public function setCle(string $cle): self
     {
-        $this->key = $key;
+        $this->cle = $cle;
 
         return $this;
     }
