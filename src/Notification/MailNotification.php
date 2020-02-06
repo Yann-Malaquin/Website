@@ -11,11 +11,11 @@ class MailNotification {
 
     public function notify(MailerInterface $mailer, User $user)
     {
-       
         //générer pour l'url
         $cle = md5(microtime(TRUE) * 100000);
         $user->setCle($cle);
         $user->setActivate(0);
+        $username = $user->getUsername();
 
         $email = (new Email())
                 ->from('noreply@eventsports.com')
@@ -24,7 +24,7 @@ class MailNotification {
                 ->subject('Time for Symfony Mailer!')
                 ->text('Sending emails is fun again!')
                 ->html('<p>Sending Mail from code</p>
-                        <p> <a href = "http://127.0.0.1:8000/">log='.urlencode($user->getUsername()).'&cle='.urlencode($cle).'</a>');
+                        <p> <a href = "http://127.0.0.1:8000/activation/log='.urlencode($username).'&cle='.urlencode($cle).'"> cliquer</a>');
 
             /** @var Symfony\Component\Mailer\SentMessage $sentEmail */
             $sentEmail = $mailer->send($email);
