@@ -30,21 +30,58 @@ class ProfilController extends AbstractController
 
         $user = $this->urepository->findOneBy(['username' => $username]);
         $profil = $this->prepository->findOneBy(['email' => $user->getEmail()]);
-
+        $username =$user->getUsername();
         $form = $this->createForm(ProfilType::class,$profil);
+        $manager = $this->getDoctrine()->getManager();
 
-
+        $imagetmp = $profil->getImage();
+        dump($profil->getImage());
         $form->handleRequest($request);
+        dump($profil->getImage());
 
         if($form->isSubmitted() && $form->isValid()){
-            $manager = $this->getDoctrine()->getManager();
+            /** @var UploadFile $image */
+
+            $image = $form->get('image')->getData();
+
+            if($image){
+                dump("if");
+                switch(implode($_FILES['profil']['type'])){
+
+                    case "image/png": 
+                        $name = $username.".png";
+                        break;
+                    case "image/jpeg": 
+                        $name = $username.".jpeg";
+                        break;
+                    case "image/gif": 
+                        $name = $username.".gif";
+                        break;
+                }
+              try{
+                $image->move(
+                    $this->getParameter('profil_directory'),
+                    $name
+                );
+              } catch (FileException $e){
+                  dump($e);
+              }
+              $profil->setImage($name);
+            }
+            else{
+                $name = $imagetmp;
+                dump($name);
+            } 
+                        
+            $profil->setImage($name);
             $manager->persist($profil);
             $manager->flush();
             $user->setEmail($profil->getEmail());
         }
 
         return $this->render('profil/profil.html.twig', [
-            'formProfil' => $form->createView()
+            'formProfil' => $form->createView(),
+            'srcImage' => '/profil/'.$profil->getImage()
         ]);
     }
 }

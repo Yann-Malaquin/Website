@@ -1,3 +1,65 @@
-body{
-    background-color: blue;
+.image-gauche-profil{
+    float:left;
+    margin-left:5%;
+    height:100%;
+    width:25%;
+}
+
+.image-droite-profil{
+    float:right;
+    margin-right:5%;
+    height:100%;
+    width:25%;
+}
+
+.profil{
+    display: block;
+    max-width: 600px;
+    margin: 80px auto;
+    border-style:solid;
+    border-radius: 20px;
+}
+
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+.label-profil{
+    margin:0 10%;
+    display: inline-block;
+    width:100px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}
+.input-profil{
+    margin-bottom : 5%;
+    font-family: "Roman";
+    font-size: 20px;
+    height: 30px;
+}
+
+.notification-profil{
+    width:400px;
+    margin-left:10%;
+    margin-bottom: 5%;
+    margin-right: 1%;
+    display: inline-block;
+    font-size: 18px;
+    font-family: "Roman";
+    color:black;
+}
+
+.upload-profil{
+    font-family: "Roman";
+    font-size: 20px;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+.modification-profil{
+    font-family: "Roman";
+    font-size: 20px;
+    margin-left: 10%;
+    margin-bottom: 5%;
 }

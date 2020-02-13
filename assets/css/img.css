@@ -1,0 +1,10 @@
+.profilPicture {
+    display: block;
+    border-radius:50%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 80px;
+    width: 128px;
+    height: 128px;
+    border-style: solid;
+}

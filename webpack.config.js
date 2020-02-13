@@ -29,6 +29,7 @@ Encore
 
 
     .addStyleEntry('css/input', './assets/css/input.css')
+    .addStyleEntry('css/img', './assets/css/img.css')
     .addStyleEntry('css/test', './assets/css/test.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
