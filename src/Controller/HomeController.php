@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\SportMeeting;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,10 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $matchs = null;
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
+            'matchs' => $matchs
         ]);
     }
 
@@ -24,6 +27,24 @@ class HomeController extends AbstractController
     {
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
+        ]);
+    }
+
+    /**
+     * @Route("/accueil/{city}", name = "test")
+     */
+
+    public function findMeeting($city)
+    {
+        $date = date("Y-m-d");
+        $matchs = $this->getDoctrine()
+            ->getRepository(SportMeeting::class)
+            ->findAllMeetingofDay($city, $date);
+
+
+        return $this->render('home/home.html.twig', [
+            'controller_name' => 'HomeController',
+            'matchs' => $matchs
         ]);
     }
 }

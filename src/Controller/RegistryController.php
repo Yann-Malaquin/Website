@@ -19,17 +19,18 @@ class RegistryController extends AbstractController
     /**
      * @Route("/inscription", name="registry")
      */
-    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder){
-        
+    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder)
+    {
+
         $user = new User();
         $profil = new Profil();
-        
-        $form = $this->createForm(RegistrationType::class,$user);
+
+        $form = $this->createForm(RegistrationType::class, $user);
 
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);

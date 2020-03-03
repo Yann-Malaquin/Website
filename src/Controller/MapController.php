@@ -2,14 +2,25 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Infrastructure;
+use App\Entity\SportMeeting;
+use App\Repository\InfrastructureRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MapController extends AbstractController
 {
+
+
+    public function __construct(InfrastructureRepository $infraRepo)
+    {
+        $this->infraRepo = $infraRepo;
+    }
+
     /**
      * Permet d'afficher la page "map"
      *
@@ -39,17 +50,16 @@ class MapController extends AbstractController
 
 
     /**
-     * @Route("/test/{city}", name = "test")
-     * Undocumented function
-     *
-     * @return Response
+     * @Route("/map/{city}")
      */
-    public function findPlace(Request $request, $city): Response
+    public function findPlace(Request $request, $city)
     {
-        return $this->json([
-            'code' => 200,
-            'message' => 'OK',
-            'ville' => $city
-        ], 200);
+
+        $date = date("Y-m-d");
+        $products = $this->getDoctrine()
+            ->getRepository(SportMeeting::class)
+            ->findAllLocation($city, $date);
+
+        return $this->json($products);
     }
 }

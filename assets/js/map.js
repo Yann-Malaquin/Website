@@ -1,4 +1,36 @@
+var getHttpRequest = function () {
+  var httpRequest = false;
+
+  if (window.XMLHttpRequest) { // Mozilla, Safari,...
+    httpRequest = new XMLHttpRequest();
+    if (httpRequest.overrideMimeType) {
+      httpRequest.overrideMimeType('text/xml');
+    }
+  }
+  else if (window.ActiveXObject) { // IE
+    try {
+      httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+      try {
+        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      catch (e) { }
+    }
+  }
+
+  if (!httpRequest) {
+    alert('Abandon :( Impossible de créer une instance XMLHTTP');
+    return false;
+  }
+
+  return httpRequest
+}
+
 navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
+
+var latitude;
+var longitude;
 
 function successHandler(position) {
 
@@ -42,12 +74,30 @@ function createMap() {
   function generatePopupContent(error, response) {
     var location = response.results[0].locations[0];
     var city = location.adminArea5;
-    document.getElementById("city").value = city;
+    var httpRequest = getHttpRequest();
+    var chemin = "/map/" + city;
+    httpRequest.open('GET', chemin, true);
+    httpRequest.send();
 
-    window.location = "/test/" + city;
+    httpRequest.onreadystatechange = function () {
 
+      if (httpRequest.readyState === 4) {
+        var i;
+        var arr = JSON.parse(httpRequest.responseText);
+        for (i = 0; i < arr.length; i++) {
+          var icone = L.icon({
+            iconUrl: '/image/icone/' + arr[i].sport + '.png',
+            iconSize: [20, 20], // size of the icon
+          });
 
+          var marker = L.marker([arr[i].latitude, arr[i].longitude],
+            { icon: icone })
+            .addTo(map);
+        }
+      }
+    }
   }
+
   L.mapquest.geocoding().reverse([latitude, longitude], generatePopupContent);
 }
 

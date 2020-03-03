@@ -22,27 +22,27 @@ class Profil
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="boolean", nullable =true)
+     * @ORM\Column(type="boolean")
      */
     private $notificationmail;
 
     /**
-     * @ORM\Column(type="boolean", nullable =true)
+     * @ORM\Column(type="boolean")
      */
     private $notificationsms;
 
@@ -50,6 +50,12 @@ class Profil
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -73,7 +79,7 @@ class Profil
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -136,6 +142,18 @@ class Profil
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

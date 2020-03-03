@@ -23,9 +23,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('home');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -40,29 +40,27 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        return $this->redirectToRoute( 'home' );
+        return $this->redirectToRoute('home');
     }
 
     /**
      * @Route("/activation/log={username}&cle={cle}", name="activation")
      */
-    public function activation(Request $request, EntityManagerInterface $manager,$username,$cle){
+    public function activation(Request $request, EntityManagerInterface $manager, $username, $cle)
+    {
 
-        dump([$username,$cle]);
+        dump([$username, $cle]);
         $user = $this->urepository->findOneBy(['username' => $username]);
 
-        if($user->getActivate() != '1')
-        {
-            if($user->getCle() == $cle)
-            {
+        if ($user->getActivate() != '1') {
+            if ($user->getCle() == $cle) {
                 $user->setActivate(1);
                 $manager->flush();
-            }   
+            }
         }
 
-        return $this->render('security/activation.html.twig',[
-            'activation' => $user->getActivate()]);
+        return $this->render('security/activation.html.twig', [
+            'activation' => $user->getActivate()
+        ]);
     }
-
-    
 }

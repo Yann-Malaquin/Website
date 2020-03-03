@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
-
-
-
-{% block javascript %}
-
-{% endblock %}
+	{% if matchs != null %}
+		{% for match in matchs %}
+			<match>
+				<h2>{{ match.sport }}</h2>
+			</match>
+		{% endfor %}
+	{% endif %}
+	{% block javascript %}
+		<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+		{{ encore_entry_script_tags('js/home') }}
+	{% endblock %}
 {% endblock %}

@@ -6,17 +6,9 @@
 
 {% block body %}
 
-	<div
-		id="map"><!-- Ici s'affichera la carte -->
-	</div>
 
-
-	{{ form_start(formtest, {'method': 'POST', 'attr': {'id': 'formcity'} })}}
-
-	{{form_widget(formtest.city, { 'id' : 'city' }) }}
-
-	{{ form_end(formtest)}}
-
+	<div id="result"></div>
+	<div id="map"></div>
 
 	{% block javascript %}
 

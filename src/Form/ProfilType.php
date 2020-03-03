@@ -23,12 +23,12 @@ class ProfilType extends AbstractType
             ->add('email', EmailType::class)
             ->add('notificationmail')
             ->add('notificationsms')
-            ->add('image', FileType::class,[
+            ->add('image', FileType::class, [
                 'required' => false,
                 'data_class' => null,
-                'constraints' =>[
+                'constraints' => [
                     new File([
-                        'mimeTypes' =>[
+                        'mimeTypes' => [
                             'image/gif',
                             'image/jpeg',
                             'image/png',
@@ -36,8 +36,7 @@ class ProfilType extends AbstractType
                         'mimeTypesMessage' => '.png, .gif, .jpeg accepté'
                     ])
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
