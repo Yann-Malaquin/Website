@@ -55,16 +55,9 @@ function createMap() {
     function generatePopupContent(error, response) {
         var location = response.results[0].locations[0];
         var city = location.adminArea5;
-        var httpRequest = getHttpRequest();
         var chemin = "/accueil/" + city;
-        httpRequest.open('GET', chemin, true);
-        httpRequest.send();
-
-        httpRequest.onreadystatechange = function () {
-            if (httpRequest.readyState === 4) {
-                return JSON.parse(httpRequest.responseText);
-            }
-        }
+        document.getElementById('load').innerHTML = "Chargement ...";
+        window.location.href = chemin;
     }
 
     L.mapquest.geocoding().reverse([latitude, longitude], generatePopupContent);

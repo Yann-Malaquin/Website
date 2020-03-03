@@ -33,6 +33,12 @@ Encore
     .addStyleEntry('css/input', './assets/css/input.css')
     .addStyleEntry('css/img', './assets/css/img.css')
     .addStyleEntry('css/test', './assets/css/test.css')
+    .addStyleEntry('css/div', './assets/css/div.css')
+    .addStyleEntry('css/span', './assets/css/span.css')
+    .addStyleEntry('css/title', './assets/css/title.css')
+    .addStyleEntry('css/p', './assets/css/p.css')
+    .addStyleEntry('css/link', './assets/css/link.css')
+    .addStyleEntry('css/ul', './assets/css/ul.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

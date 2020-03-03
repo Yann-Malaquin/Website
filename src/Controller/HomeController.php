@@ -13,6 +13,7 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+
         $matchs = null;
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
@@ -25,15 +26,16 @@ class HomeController extends AbstractController
      */
     public function home()
     {
+        $matchs = null;
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
+            'matchs' => $matchs
         ]);
     }
 
     /**
-     * @Route("/accueil/{city}", name = "test")
+     * @Route("/accueil/{city}", name = "homeDisplay")
      */
-
     public function findMeeting($city)
     {
         $date = date("Y-m-d");
@@ -42,7 +44,7 @@ class HomeController extends AbstractController
             ->findAllMeetingofDay($city, $date);
 
 
-        return $this->render('home/home.html.twig', [
+        return $this->render('home/homeDisplay.html.twig', [
             'controller_name' => 'HomeController',
             'matchs' => $matchs
         ]);

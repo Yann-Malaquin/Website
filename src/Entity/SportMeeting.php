@@ -27,9 +27,14 @@ class SportMeeting
     private $type;
 
     /**
-     * @ORM\Column(type="datetimetz")
+     * @ORM\Column(type="string")
      */
-    private $date;
+    private $h_min;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $day_month;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -81,14 +86,26 @@ class SportMeeting
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getHMin(): ?string
     {
-        return $this->date;
+        return $this->h_min;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setHMin(string $h_min): self
     {
-        $this->date = $date;
+        $this->h_min = $h_min;
+
+        return $this;
+    }
+
+    public function getDayMonth(): ?string
+    {
+        return $this->day_month;
+    }
+
+    public function setDayMonth(string $day_month): self
+    {
+        $this->day_month = $day_month;
 
         return $this;
     }

@@ -52,7 +52,7 @@ class SportMeetingRepository extends ServiceEntityRepository
     {
         $qb =  $this->createQueryBuilder('s')
             ->select('i.latitude, i.longitude, s.sport')
-            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.date LIKE :date')
+            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.day_month LIKE :date')
             ->join('s.infrastructure', 'i')
             ->setParameter('city', $city)
             ->setParameter('date', $date . '%');
@@ -63,8 +63,8 @@ class SportMeetingRepository extends ServiceEntityRepository
     public function findAllMeetingofDay($city, $date)
     {
         $qb =  $this->createQueryBuilder('s')
-            ->select('i.name, i.address, i.city, s.type, s.sport, s.team_home, s.team_outside, s.date')
-            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.date LIKE :date')
+            ->select('i.name, i.address, i.city, s.type, s.sport, s.team_home, s.team_outside, s.h_min, s.day_month ')
+            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.day_month LIKE :date')
             ->join('s.infrastructure', 'i')
             ->setParameter('city', $city)
             ->setParameter('date', $date . '%');
