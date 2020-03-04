@@ -16,8 +16,7 @@ class HomeController extends AbstractController
 
         $matchs = null;
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
-            'matchs' => $matchs
+            'controller_name' => 'HomeController'
         ]);
     }
 
@@ -28,8 +27,7 @@ class HomeController extends AbstractController
     {
         $matchs = null;
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
-            'matchs' => $matchs
+            'controller_name' => 'HomeController'
         ]);
     }
 

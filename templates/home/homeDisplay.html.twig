@@ -18,9 +18,12 @@
 				<h4 class='homeDisplay-titleh4'>{{ match.name }}</h4>
 
 				<p class="homeDisplay-p">
+					<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
 					{{ match.team_home }}
 					<span class='homeDisplay-tab'>{{ match.h_min }}</span>
-					<span class='homeDisplay-tab'>{{ match.team_outside }}</span>
+					<span class='homeDisplay-tab'>{{ match.team_outside }}
+						<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64">
+					</span>
 				</p>
 				<p>
 					<a class='homeDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
