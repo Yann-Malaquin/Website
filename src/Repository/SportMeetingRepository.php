@@ -71,4 +71,16 @@ class SportMeetingRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBySport($city, $sport)
+    {
+        $qb =  $this->createQueryBuilder('s')
+            ->select('i.name, i.address, i.city, s.type, s.sport, s.team_home, s.team_outside, s.h_min, s.day_month ')
+            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.sport = :sport')
+            ->join('s.infrastructure', 'i')
+            ->setParameter('city', $city)
+            ->setParameter('sport', $sport);
+
+        return $qb->getQuery()->getResult();
+    }
 }

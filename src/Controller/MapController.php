@@ -25,25 +25,11 @@ class MapController extends AbstractController
      * Permet d'afficher la page "map"
      *
      * @Route("/map", name="map")
-     * @param Request $request
      * @return void
      */
-    public function index(Request $request)
+    public function index()
     {
-        $defaultData = null;
-        $form = $this->createFormBuilder($defaultData)
-            ->add('city')
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($request->getMethod() == 'POST') {
-            $test = $form->getData();
-            dump($test['city']);
-        }
-
         return $this->render('map/map.html.twig', [
-            'formtest' => $form->createView(),
             'controller_name' => 'MapController',
         ]);
     }
@@ -56,10 +42,10 @@ class MapController extends AbstractController
     {
 
         $date = date("Y-m-d");
-        $products = $this->getDoctrine()
+        $place = $this->getDoctrine()
             ->getRepository(SportMeeting::class)
             ->findAllLocation($city, $date);
 
-        return $this->json($products);
+        return $this->json($place);
     }
 }

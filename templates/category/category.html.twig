@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+{{ encore_entry_link_tags('css/div') }}
+{{ encore_entry_link_tags('css/span') }}
+{{ encore_entry_link_tags('css/title') }}
+{{ encore_entry_link_tags('css/p') }}
+{{ encore_entry_link_tags('css/link') }}
+
+{% for match in matchs %}
+	<match>
+		<div class="categoryDisplay-displayMeeting">
+			<h3 class='categoryDisplay-titleh3'>{{ match.sport }},
+
+				{{ match.type }}</h3>
+			<h4 class='categoryDisplay-titleh4'>{{ match.name }}</h4>
+
+
+			<p class="categoryDisplay-p"></p>
+
+			<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
+			{{ match.team_home }}
+			<span class='categoryDisplay-tab'>{{ match.h_min }}</span>
+
+			<span class='categoryDisplay-tab'>{{ match.team_outside }}
+
+				<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64">
+			</span>
+		</p>
+		<p>
+			<a class='categoryDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+		</p>
+	</div>
+</match>{% endfor %}{% block javascript %}{% endblock %}{% endblock %}
