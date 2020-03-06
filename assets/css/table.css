@@ -1,0 +1,24 @@
+.homeDisplay-tableDisplayMeeting{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 600px;
+}
+
+.homeDisplay-tdDisplayMeeting{
+    width: 150px;
+    vertical-align: center;
+}
+
+.categoryDisplay-tableDisplayMeeting{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 600px;
+}
+
+.categoryDisplay-tdDisplayMeeting{
+    width: 150px;
+    vertical-align: center;
+}
+

@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/categorie/{city}/{categorie}", name="category")
+     * @Route("/categorie/city={city}/{categorie}", name="category")
      */
     public function index($categorie, $city)
     {

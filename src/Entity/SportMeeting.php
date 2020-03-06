@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\DateTimeTzType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,14 +28,9 @@ class SportMeeting
     private $type;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetimetz")
      */
-    private $h_min;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $day_month;
+    private $meeting;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -86,29 +82,19 @@ class SportMeeting
         return $this;
     }
 
-    public function getHMin(): ?string
+    public function getMeeting(): ?DateTimeTzType
     {
-        return $this->h_min;
+        return $this->meeting;
     }
 
-    public function setHMin(string $h_min): self
+
+    public function setMeeting(DateTimeTzType $h_min): self
     {
-        $this->h_min = $h_min;
+        $this->meeting = $meeting;
 
         return $this;
     }
 
-    public function getDayMonth(): ?string
-    {
-        return $this->day_month;
-    }
-
-    public function setDayMonth(string $day_month): self
-    {
-        $this->day_month = $day_month;
-
-        return $this;
-    }
 
     public function getTeamHome(): ?string
     {

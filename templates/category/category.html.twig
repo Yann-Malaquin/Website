@@ -1,37 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Catégorie |
+	{{title}}
 {% endblock %}
 
 {% block body %}
-{{ encore_entry_link_tags('css/div') }}
-{{ encore_entry_link_tags('css/span') }}
-{{ encore_entry_link_tags('css/title') }}
-{{ encore_entry_link_tags('css/p') }}
-{{ encore_entry_link_tags('css/link') }}
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/span') }}
+	{{ encore_entry_link_tags('css/title') }}
+	{{ encore_entry_link_tags('css/p') }}
+	{{ encore_entry_link_tags('css/link') }}
+	{{ encore_entry_link_tags('css/table') }}
 
-{% for match in matchs %}
-	<match>
-		<div class="categoryDisplay-displayMeeting">
-			<h3 class='categoryDisplay-titleh3'>{{ match.sport }},
-
-				{{ match.type }}</h3>
-			<h4 class='categoryDisplay-titleh4'>{{ match.name }}</h4>
-
-
-			<p class="categoryDisplay-p"></p>
-
-			<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
-			{{ match.team_home }}
-			<span class='categoryDisplay-tab'>{{ match.h_min }}</span>
-
-			<span class='categoryDisplay-tab'>{{ match.team_outside }}
-
-				<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64">
-			</span>
-		</p>
-		<p>
-			<a class='categoryDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
-		</p>
-	</div>
-</match>{% endfor %}{% block javascript %}{% endblock %}{% endblock %}
+	{% for match in matchs %}
+		<match>
+			<div class="categoryDisplay-displayAll">
+				<h3 class='categoryDisplay-titleh3'>{{ match.sport }},
+					{{ match.type }}</h3>
+				<h4 class='categoryDisplay-titleh4'>{{ match.name }}</h4>
+				<table class='categoryDisplay-tableDisplayMeeting'>
+					<tbody>
+						<tr>
+							<td class='categoryDisplay-tdDisplayMeeting'><img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
+								{{ match.team_home }}</td>
+							<td class='categoryDisplay-tdDisplayMeeting'>
+								{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
+									<div class='categoryDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
+									</div>
+								{% else %}
+									<div class='categoryDisplay-dateDisplay'>
+										{{ match.meeting|date("G:i") }}<br>
+										{{ match.meeting|date("d-m-Y")}}
+									</div>
+								{% endif %}
+							</td>
+							<td class='categoryDisplay-tdDisplayMeeting'>{{ match.team_outside }}<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64"></td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
+						<a class='categoryDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+					{% endif %}
+				</p>
+			</div>
+		</match>
+	{% endfor %}
+	{% block javascript %}{% endblock %}
+{% endblock %}

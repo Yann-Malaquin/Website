@@ -92,14 +92,16 @@ function createMap() {
 
           var marker = L.marker([arr[i].latitude, arr[i].longitude],
             { icon: icone })
-            .addTo(map);
+            .addTo(map)
         }
       }
     }
   }
-
   L.mapquest.geocoding().reverse([latitude, longitude], generatePopupContent);
 }
+
+
+
 
 window.onload = function () {
   createMap();

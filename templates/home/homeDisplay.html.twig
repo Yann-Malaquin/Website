@@ -9,25 +9,31 @@
 	{{ encore_entry_link_tags('css/title') }}
 	{{ encore_entry_link_tags('css/p') }}
 	{{ encore_entry_link_tags('css/link') }}
+	{{ encore_entry_link_tags('css/table') }}
+
 
 	{% for match in matchs %}
 		<match>
-			<div class="homeDisplay-displayMeeting">
+			<div class="homeDisplay-displayAll">
 				<h3 class='homeDisplay-titleh3'>{{ match.sport }},
 					{{ match.type }}</h3>
 				<h4 class='homeDisplay-titleh4'>{{ match.name }}</h4>
+				<table class='homeDisplay-tableDisplayMeeting'>
+					<tbody>
+						<tr>
+							<td class='homeDisplay-tdDisplayMeeting'><img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
+								{{ match.team_home }}</td>
+							<td class='homeDisplay-tdDisplayMeeting'>
+								<div class='homeDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
+								</div>
+							</td>
+							<td class='homeDisplay-tdDisplayMeeting'>{{ match.team_outside }}<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64"></td>
 
-				<p class="homeDisplay-p">
-					<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
-					{{ match.team_home }}
-					<span class='homeDisplay-tab'>{{ match.h_min }}</span>
-					<span class='homeDisplay-tab'>{{ match.team_outside }}
-						<img src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64">
-					</span>
-				</p>
+						</tr>
+					</tbody>
+				</table>
 				<p>
 					<a class='homeDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
-
 				</p>
 			</div>
 		</match>

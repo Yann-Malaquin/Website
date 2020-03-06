@@ -24,8 +24,18 @@ class MapController extends AbstractController
     /**
      * Permet d'afficher la page "map"
      *
-     * @Route("/map", name="map")
+     * @Route("/map/city={city}", name="map")
      * @return void
+     */
+    public function indexCity()
+    {
+        return $this->render('map/map.html.twig', [
+            'controller_name' => 'MapController',
+        ]);
+    }
+
+    /**
+     * @Route ("/map" , name="map/")
      */
     public function index()
     {
@@ -34,13 +44,11 @@ class MapController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/map/{city}")
      */
     public function findPlace(Request $request, $city)
     {
-
         $date = date("Y-m-d");
         $place = $this->getDoctrine()
             ->getRepository(SportMeeting::class)

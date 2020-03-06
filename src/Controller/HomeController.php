@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/")
+     * @Route("/", name = "index")
      */
     public function home()
     {
@@ -32,7 +32,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/accueil/{city}", name = "homeDisplay")
+     * @Route("/accueil/city={city}", name = "homeDisplay")
      */
     public function findMeeting($city)
     {
@@ -40,7 +40,6 @@ class HomeController extends AbstractController
         $matchs = $this->getDoctrine()
             ->getRepository(SportMeeting::class)
             ->findAllMeetingofDay($city, $date);
-
 
         return $this->render('home/homeDisplay.html.twig', [
             'controller_name' => 'HomeController',
