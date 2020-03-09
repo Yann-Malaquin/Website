@@ -1,11 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Accueil
 {% endblock %}
 
 {% block body %}
-	<div id='load'></div>
-
+	{{ encore_entry_link_tags('css/load') }}
+	<div class="lds-spinner">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
 
 	{% block javascript %}
 		<script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>

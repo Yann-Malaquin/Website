@@ -56,7 +56,6 @@ function createMap() {
         var location = response.results[0].locations[0];
         var city = location.adminArea5;
         var chemin = "/accueil/city=" + city;
-        document.getElementById('load').innerHTML = "Chargement ...";
         window.location.href = chemin;
     }
 

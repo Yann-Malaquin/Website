@@ -24,7 +24,7 @@ class ProfilController extends AbstractController
 
 
     /**
-     * @Route("/profil/{username}", name="profil")
+     * @Route("/profil/city={city}/{username}", name="profil")
      */
     public function index(Request $request, EntityManagerInterface $manager, $username)
     {

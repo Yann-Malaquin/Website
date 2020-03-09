@@ -51,9 +51,10 @@ class SportMeetingRepository extends ServiceEntityRepository
     public function findAllLocation($city, $date)
     {
         $qb =  $this->createQueryBuilder('s')
-            ->select('i.latitude, i.longitude, s.sport')
+            ->select('i.id,i.latitude, i.longitude, s.sport, i.name, i.address, i.city')
             ->andWhere('i.city = :city', 'i.id = s.infrastructure', 's.meeting LIKE :date')
             ->join('s.infrastructure', 'i')
+            ->distinct(true)
             ->setParameter('city', $city)
             ->setParameter('date', $date . '%');
 

@@ -48,10 +48,20 @@ class SportMeeting
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Infrastructure", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Infrastructure", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $infrastructure;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $finish;
+
+    /**
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    private $durationMeeting;
 
     public function getId(): ?int
     {
@@ -140,6 +150,30 @@ class SportMeeting
     public function setInfrastructure(Infrastructure $infrastructure): self
     {
         $this->infrastructure = $infrastructure;
+
+        return $this;
+    }
+
+    public function getFinish(): ?bool
+    {
+        return $this->finish;
+    }
+
+    public function setFinish(bool $finish): self
+    {
+        $this->finish = $finish;
+
+        return $this;
+    }
+
+    public function getDurationMeeting(): ?int
+    {
+        return $this->durationMeeting;
+    }
+
+    public function setDurationMeeting(int $durationMeeting): self
+    {
+        $this->durationMeeting = $durationMeeting;
 
         return $this;
     }

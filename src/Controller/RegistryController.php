@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistryController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="registry")
+     * @Route("/inscription/city={city}", name="registry")
      */
     public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder)
     {

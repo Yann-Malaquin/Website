@@ -93,6 +93,7 @@ function createMap() {
           var marker = L.marker([arr[i].latitude, arr[i].longitude],
             { icon: icone })
             .addTo(map)
+            .bindPopup("<b> " + arr[i].name + " </b> <br> " + arr[i].address + "</br> <br> " + arr[i].city + "</br> ")
         }
       }
     }
