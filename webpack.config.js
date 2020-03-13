@@ -30,17 +30,18 @@ Encore
     //.addEntry('page2', './assets/js/page2.js')
 
 
-    .addStyleEntry('css/input', './assets/css/input.css')
-    .addStyleEntry('css/img', './assets/css/img.css')
-    .addStyleEntry('css/test', './assets/css/test.css')
+    .addStyleEntry('css/button', './assets/css/button.css')
     .addStyleEntry('css/div', './assets/css/div.css')
-    .addStyleEntry('css/span', './assets/css/span.css')
-    .addStyleEntry('css/title', './assets/css/title.css')
-    .addStyleEntry('css/p', './assets/css/p.css')
+    .addStyleEntry('css/img', './assets/css/img.css')
+    .addStyleEntry('css/input', './assets/css/input.css')
+    .addStyleEntry('css/label', './assets/css/label.css')
     .addStyleEntry('css/link', './assets/css/link.css')
-    .addStyleEntry('css/ul', './assets/css/ul.css')
-    .addStyleEntry('css/table', './assets/css/table.css')
     .addStyleEntry('css/load', './assets/css/load.css')
+    .addStyleEntry('css/p', './assets/css/p.css')
+    .addStyleEntry('css/span', './assets/css/span.css')
+    .addStyleEntry('css/table', './assets/css/table.css')
+    .addStyleEntry('css/title', './assets/css/title.css')
+    .addStyleEntry('css/ul', './assets/css/ul.css')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

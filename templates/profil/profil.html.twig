@@ -4,63 +4,55 @@
 {% endblock %}
 
 {% block body %}
-
-	{# {{ encore_entry_link_tags('css/input') }} #}
 	{{ encore_entry_link_tags('css/img') }}
-	{{ encore_entry_link_tags('css/test') }}
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/label') }}
+	{{ encore_entry_link_tags('css/input') }}
+	{{ encore_entry_link_tags('css/button') }}
 
-	<div class="profil">
-		<img src="{{ asset( srcImage ) }}" class="profilPicture">
+
+	<div class="profil-profilDisplay">
+		<img src="{{ asset( srcImage ) }}" class="profil-picture">
 		{{ form_start(formProfil) }}
 
 		<div class="div">
-			{{ form_label(formProfil.firstname, 'Prénom', {'label_attr': {'class': 'label-profil'}}) }}
-			{{ form_widget(formProfil.firstname, {'attr': {'class': 'input-profil'}}) }}
-			{#<button type="submit" name= "editFirstName" value="editFirstName">
-									           <img src = "{{ asset('image/squarePenEdit.png') }}" height = "16" width="16">
-									        </button>#}
+			{{ form_label(formProfil.firstname, 'Prénom', {'label_attr': {'class': 'profil-label'}}) }}
+			{{ form_widget(formProfil.firstname, {'attr': {'class': 'profil-input'}}) }}
+		</div>
+		<div>
+			{{ form_label(formProfil.name, 'Nom', {'label_attr': {'class': 'profil-label'}}) }}
+			{{ form_widget(formProfil.name, {'attr': {'class': 'profil-input'}}) }}
+		</div>
+
+		<div class="form">
+			{{ form_label(formProfil.email, 'Email',{'label_attr': {'class': 'profil-label'}}) }}
+
+			{{ form_widget(formProfil.email, {'attr': {'class': 'profil-input'}}) }}
 
 		</div>
 		<div>
-			{{ form_label(formProfil.name, 'Nom', {'label_attr': {'class': 'label-profil'}}) }}
-			{{ form_widget(formProfil.name, {'attr': {'class': 'input-profil'}}) }}
-			{#<button type="submit" name= "editFirstName" value="editFirstName">
-									           <img src = "{{ asset('image/squarePenEdit.png') }}" height = "16" width="16">
-									        </button>#}
+
+			{{ form_label(formProfil.phone, 'Téléphone',{'label_attr': {'class': 'profil-label'}}) }}
+
+			{{ form_widget(formProfil.phone, {'attr': {'class': 'profil-input'}}) }}
+
 		</div>
 
 		<div class="form">
-			{{ form_label(formProfil.email, 'Email',{'label_attr': {'class': 'label-profil'}}) }}
-			{{ form_widget(formProfil.email, {'attr': {'class': 'input-profil'}}) }}
-			{#<button type="submit" name= "editFirstName" value="editFirstName">
-									           <img src = "{{ asset('image/squarePenEdit.png') }}" height = "16" width="16">
-									        </button>#}
+			{{ form_label(formProfil.notificationmail, 'Voulez-vous recevoir une notification par mail ?', {'label_attr': {'class': 'profil-notification'}}) }}
+			{{ form_widget(formProfil.notificationmail) }}
 		</div>
 		<div>
-
-			{{ form_label(formProfil.phone, 'Téléphone',{'label_attr': {'class': 'label-profil'}}) }}
-			{{ form_widget(formProfil.phone, {'attr': {'class': 'input-profil'}}) }}
-
-			{#<button type="submit" name= "editFirstName" value="editFirstName">
-									           <img src = "{{ asset('image/squarePenEdit.png') }}" height = "16" width="16">
-									        </button>#}
+			{{ form_label(formProfil.notificationsms, 'Voulez-vous recevoir une notification par sms ?', {'label_attr': {'class': 'profil-notification'}}) }}
+			{{ form_widget(formProfil.notificationsms) }}
 		</div>
 
 		<div class="form">
-			{{ form_label(formProfil.notificationmail, 'Voulez-vous recevoir une notification par mail ?', {'label_attr': {'class': 'notification-profil'}}) }}
-			{{ form_widget(formProfil.notificationmail, {'attr': {'class': 'checkbox-profil'}}) }}
-		</div>
-		<div>
-			{{ form_label(formProfil.notificationsms, 'Voulez-vous recevoir une notification par sms ?', {'label_attr': {'class': 'notification-profil'}}) }}
-			{{ form_widget(formProfil.notificationsms, {'attr': {'class': 'checkbox-profil'}}) }}
+			{{ form_widget(formProfil.image, {'attr': {'class': 'profil-upload'}}) }}
 		</div>
 
 		<div class="form">
-			{{ form_widget(formProfil.image, {'attr': {'class': 'upload-profil'}}) }}
-		</div>
-
-		<div class="form">
-			<button type="submit" name="modification" value="modification" class="modification-profil">Modifier
+			<button type="submit" name="modification" value="modification" class="profil-modification">Modifier
 				<img class="extern" src="{{ asset('image/squarePenEdit.png') }}" height="16" width="16"></button>
 		</div>
 
