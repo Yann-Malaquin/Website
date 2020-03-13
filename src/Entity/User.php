@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(
  * fields = {"email"},
  * message="Adresse mail déjà utilisé")
-* @UniqueEntity(
+ * @UniqueEntity(
  * fields = {"username"},
  * message="Nom d'utilisateur déjà utilisé")
  */
@@ -36,7 +36,7 @@ class User implements UserInterface
      */
     private $username;
 
-        /**
+    /**
      * @ORM\Column(type="string", length=255, nullable = true)
      * @Assert\Length(min="8", minMessage="Le mot de passe doit contenir 8 caractères minimum")
      */
@@ -98,14 +98,17 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles(){
+    public function getRoles()
+    {
         return array('ROLE_USER');
     }
 
-    public function getSalt(){
+    public function getSalt()
+    {
     }
 
-    public function eraseCredentials(){
+    public function eraseCredentials()
+    {
     }
 
     public function getCle(): ?string

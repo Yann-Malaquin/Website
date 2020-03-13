@@ -1,21 +1,25 @@
-.profil{
-    display: block;
-    max-width: 600px;
-    margin: 80px auto;
-    border-style:dashed;
-    border-radius: 20px;
-    padding: 30px 30px;
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
 }
 
-.input-profil{
-    margin-bottom : 10%;
-    color : white;
+.profil-input{
+    margin-bottom : 5%;
+    font-family: "Roman";
+    font-size: 20px;
+    height: 30px;
 }
 
-.div{
-    border-style: solid;
+.profil-upload{
+    font-family: "Roman";
+    font-size: 20px;
+    margin-left: 10%;
+    margin-bottom: 5%;
 }
 
-body{
-    background-color: white;
+.registry-input{
+    margin-bottom : 5%;
+    font-family: "Roman";
+    font-size: 20px;
+    height: 30px;
 }

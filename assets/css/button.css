@@ -1,0 +1,15 @@
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+
+.profil-modification{
+    font-family: "Roman";
+    font-size: 20px;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+.btn{
+    margin-bottom: 20px;
+}

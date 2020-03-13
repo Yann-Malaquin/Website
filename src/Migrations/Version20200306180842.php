@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200206161635 extends AbstractMigration
+final class Version20200306180842 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,8 @@ final class Version20200206161635 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE profil ADD image VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE user CHANGE activate activate INT DEFAULT 0 NOT NULL');
+        $this->addSql('ALTER TABLE sport_meeting DROP INDEX UNIQ_54A0AD93243E7A84, ADD INDEX IDX_54A0AD93243E7A84 (infrastructure_id)');
+        $this->addSql('ALTER TABLE sport_meeting CHANGE meeting meeting DATETIME NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +31,7 @@ final class Version20200206161635 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE profil DROP image');
-        $this->addSql('ALTER TABLE user CHANGE activate activate INT DEFAULT 0');
+        $this->addSql('ALTER TABLE sport_meeting DROP INDEX IDX_54A0AD93243E7A84, ADD UNIQUE INDEX UNIQ_54A0AD93243E7A84 (infrastructure_id)');
+        $this->addSql('ALTER TABLE sport_meeting CHANGE meeting meeting DATETIME NOT NULL');
     }
 }

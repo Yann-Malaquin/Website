@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profil;
+
 use App\Form\ProfilType;
 use App\Repository\UserRepository;
 use App\Repository\ProfilRepository;
@@ -23,15 +24,15 @@ class ProfilController extends AbstractController
 
 
     /**
-     * @Route("/profil/{username}", name="profil")
+     * @Route("/profil/city={city}/{username}", name="profil")
      */
     public function index(Request $request, EntityManagerInterface $manager, $username)
     {
 
         $user = $this->urepository->findOneBy(['username' => $username]);
         $profil = $this->prepository->findOneBy(['email' => $user->getEmail()]);
-        $username =$user->getUsername();
-        $form = $this->createForm(ProfilType::class,$profil);
+        $username = $user->getUsername();
+        $form = $this->createForm(ProfilType::class, $profil);
         $manager = $this->getDoctrine()->getManager();
 
         $imagetmp = $profil->getImage();
@@ -39,40 +40,39 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
         dump($profil->getImage());
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadFile $image */
 
             $image = $form->get('image')->getData();
 
-            if($image){
+            if ($image) {
                 dump("if");
-                switch(implode($_FILES['profil']['type'])){
+                switch (implode($_FILES['profil']['type'])) {
 
-                    case "image/png": 
-                        $name = $username.".png";
+                    case "image/png":
+                        $name = $username . ".png";
                         break;
-                    case "image/jpeg": 
-                        $name = $username.".jpeg";
+                    case "image/jpeg":
+                        $name = $username . ".jpeg";
                         break;
-                    case "image/gif": 
-                        $name = $username.".gif";
+                    case "image/gif":
+                        $name = $username . ".gif";
                         break;
                 }
-              try{
-                $image->move(
-                    $this->getParameter('profil_directory'),
-                    $name
-                );
-              } catch (FileException $e){
-                  dump($e);
-              }
-              $profil->setImage($name);
-            }
-            else{
+                try {
+                    $image->move(
+                        $this->getParameter('profil_directory'),
+                        $name
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+                $profil->setImage($name);
+            } else {
                 $name = $imagetmp;
                 dump($name);
-            } 
-                        
+            }
+
             $profil->setImage($name);
             $manager->persist($profil);
             $manager->flush();
@@ -81,7 +81,7 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/profil.html.twig', [
             'formProfil' => $form->createView(),
-            'srcImage' => '/profil/'.$profil->getImage()
+            'srcImage' => '/profil/' . $profil->getImage()
         ]);
     }
 }

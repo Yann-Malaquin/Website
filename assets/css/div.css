@@ -1,0 +1,71 @@
+.homeDisplay-displayAll{
+    background-color: darkslategrey;
+    display: block;
+    max-width: 800px;
+    margin: 80px auto;
+    border-style:solid;
+    border-color: black;
+    color : white;
+    text-align: center;
+}
+
+.categoryDisplay-displayAll{
+    background-color: darkslategrey;
+    display: block;
+    max-width: 800px;
+    margin: 80px auto;
+    border-style:solid;
+    border-color: black;
+    color : white;
+    text-align: center;
+}
+
+.homeDisplay-displayMeeting{
+    background-color: darkslategrey;
+    display: block;
+    max-width: 800px;
+    margin: 80px auto;
+    color : white;
+    text-align: center;
+}
+
+.categoryDisplay-displayMeeting{
+    background-color: darkslategrey;
+    display: block;
+    max-width: 600px;
+    margin: 80px auto;
+    color : white;
+    text-align: center;
+}
+
+.homeDisplay-dateDisplay{
+    font-size: 20px;
+}
+
+.categoryDisplay-dateDisplay{
+    font-size: 20px;
+}
+
+.registry-displayRegistry{
+    margin-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    width : 800px;
+    border-radius: 10px;
+}
+
+.profil-profilDisplay{
+    display: block;
+    max-width: 600px;
+    margin: 80px auto;
+    border-style:solid;
+    border-radius: 20px;
+}
+
+.registry-form{
+    display:block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 125px;
+}

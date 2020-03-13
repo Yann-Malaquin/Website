@@ -1,8 +1,9 @@
-.profilPicture {
+.profil-picture {
     display: block;
     border-radius:50%;
     margin-left:auto;
     margin-right:auto;
+    margin-top: 20px;
     margin-bottom: 80px;
     width: 128px;
     height: 128px;
