@@ -46,14 +46,6 @@
     font-size: 20px;
 }
 
-.registry-displayRegistry{
-    margin-top:20px;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: solid;
-    width : 800px;
-    border-radius: 10px;
-}
 
 .profil-profilDisplay{
     display: block;
@@ -63,9 +55,41 @@
     border-radius: 20px;
 }
 
+.registry-displayRegistry{
+    margin-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    width : 800px;
+    border-radius: 10px;
+}
+
 .registry-form{
     display:block;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 125px;
+}
+
+.registry-title{
+    text-align: center;
+}
+
+.login-displayLogin{
+    margin-top:20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    width : 800px;
+    border-radius: 10px;
+}
+
+.login-form{
+    display:block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 125px;
+}
+.login-title{
+    text-align: center;
 }

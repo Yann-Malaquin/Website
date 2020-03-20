@@ -39,6 +39,7 @@ class RegistryController extends AbstractController
             $manager->flush();
 
             $profil->setEmail($user->getEmail());
+            $profil->setUser($user);
             $manager->persist($profil);
             $manager->flush();
 

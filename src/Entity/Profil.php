@@ -37,12 +37,12 @@ class Profil
     private $phone;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable = true, options={"default":0})
      */
     private $notificationmail;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable = true, options={"default":0})
      */
     private $notificationsms;
 
