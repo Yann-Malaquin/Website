@@ -31,6 +31,8 @@
 					<label for="inputPassword" class='login-label'>Mot de passe</label>
 					<input type="password" name="password" id="inputPassword" class='login-input' required>
 				</div>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
 				<div>
 					<button class="btn btn-primary" type="submit">Connexion</button>
 				</div>
