@@ -32,3 +32,13 @@
     font-family: "Roman";
     color:black;
 }
+
+.login-label{
+    margin-top:60px;
+    margin-right : 30px;
+    display: inline-block;
+    width:180px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}

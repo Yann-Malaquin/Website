@@ -9,9 +9,12 @@
 	{{ encore_entry_link_tags('css/input') }}
 	{{ encore_entry_link_tags('css/button') }}
 
-
+	<div class='registry-title'>
+		<h1>Inscription</h1>
+	</div>
 	<div class='registry-displayRegistry'>
-		{{ encore_entry_link_tags('css/div') }}
+		{{ form_start(formRegistration)}}
+
 		<div class='registry-form'>
 			<div class="form-group">
 				{{ form_label(formRegistration.email, 'Email', {'label_attr': {'class': 'registry-label'}}) }}
@@ -19,8 +22,8 @@
 
 			</div>
 
-			<div>
-				{{ form_label(formRegistration.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'registry-label'}}) }}
+			<div class="form-group">
+				{{ form_label(formRegistration.username, 'Nom d utilisateur', {'label_attr': {'class': 'registry-label'}}) }}
 
 				{{ form_widget(formRegistration.username, {'attr' : {'placeholder' : 'Mimi', 'class' : 'registry-input'}}) }}
 
@@ -44,7 +47,6 @@
 			</div>
 
 			{{ form_end(formRegistration)}}
-
-			</div>
 		</div>
-	{% endblock %}
+	</div>
+{% endblock %}

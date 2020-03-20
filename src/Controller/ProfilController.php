@@ -34,7 +34,6 @@ class ProfilController extends AbstractController
         $username = $user->getUsername();
         $form = $this->createForm(ProfilType::class, $profil);
         $manager = $this->getDoctrine()->getManager();
-
         $imagetmp = $profil->getImage();
         dump($profil->getImage());
         $form->handleRequest($request);
