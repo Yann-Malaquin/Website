@@ -42,3 +42,12 @@
     font-family: "Roman";
     color:black;
 }
+
+.password-label{
+    margin-top:60px;
+    display: inline-block;
+    width:250px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}

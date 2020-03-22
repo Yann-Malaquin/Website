@@ -9,6 +9,7 @@
 	{{ encore_entry_link_tags('css/label') }}
 	{{ encore_entry_link_tags('css/input') }}
 	{{ encore_entry_link_tags('css/button') }}
+	{{ encore_entry_link_tags('css/link') }}
 
 
 	<div class="profil-profilDisplay">
@@ -26,23 +27,23 @@
 
 		<div class="form">
 			{{ form_label(formProfil.email, 'Email',{'label_attr': {'class': 'profil-label'}}) }}
-
 			{{ form_widget(formProfil.email, {'attr': {'class': 'profil-input'}}) }}
 
 		</div>
 		<div>
-
 			{{ form_label(formProfil.phone, 'Téléphone',{'label_attr': {'class': 'profil-label'}}) }}
-
 			{{ form_widget(formProfil.phone, {'attr': {'class': 'profil-input'}}) }}
-
+		</div>
+		<div>
+			<a class='a-profil' href="{{ path('pwdchange',{username : app.user.username }) }}">
+				Modifier le mot de passe</a>
 		</div>
 
 		<div class="form">
 			{{ form_label(formProfil.notificationmail, 'Voulez-vous recevoir une notification par mail ?', {'label_attr': {'class': 'profil-notification'}}) }}
 			{{ form_widget(formProfil.notificationmail) }}
 		</div>
-		<div>
+		<div class="form">
 			{{ form_label(formProfil.notificationsms, 'Voulez-vous recevoir une notification par sms ?', {'label_attr': {'class': 'profil-notification'}}) }}
 			{{ form_widget(formProfil.notificationsms) }}
 		</div>
@@ -55,9 +56,7 @@
 			<button type="submit" name="modification" value="modification" class="profil-modification">Modifier
 				<img class="extern" src="{{ asset('image/squarePenEdit.png') }}" height="16" width="16"></button>
 		</div>
-
 		{{ form_end(formProfil) }}
-
 	</div>
 
 {% endblock %}

@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
@@ -20,8 +22,6 @@ class ProfilController extends AbstractController
         $this->prepository = $prepository;
         $this->urepository = $urepository;
     }
-
-
 
     /**
      * @Route("/profil/city={city}/{username}", name="profil")
@@ -35,9 +35,8 @@ class ProfilController extends AbstractController
         $form = $this->createForm(ProfilType::class, $profil);
         $manager = $this->getDoctrine()->getManager();
         $imagetmp = $profil->getImage();
-        dump($profil->getImage());
         $form->handleRequest($request);
-        dump($profil->getImage());
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadFile $image */
@@ -45,7 +44,6 @@ class ProfilController extends AbstractController
             $image = $form->get('image')->getData();
 
             if ($image) {
-                dump("if");
                 switch (implode($_FILES['profil']['type'])) {
 
                     case "image/png":
@@ -81,6 +79,49 @@ class ProfilController extends AbstractController
         return $this->render('profil/profil.html.twig', [
             'formProfil' => $form->createView(),
             'srcImage' => '/profil/' . $profil->getImage()
+        ]);
+    }
+
+    /**
+     * @Route("/pwdchange/{username}", name="pwdchange")
+     */
+
+    public function modificationpwd(Request $request, EntityManagerInterface $manager,  UserPasswordEncoderInterface $encoder, $username)
+    {
+        $user = $this->urepository->findOneBy(['username' => $username]);
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $form = $this->createFormBuilder()
+            ->add('pwd', PasswordType::class)
+            ->add('confirmPwd', PasswordType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pwd = $form['pwd']->getData();
+            $confirmPWD =  $form['confirmPwd']->getData();
+            if (strcmp($pwd, $confirmPWD) == 0) {
+
+                $manager = $this->getDoctrine()->getManager();
+                $hash = $encoder->encodePassword($user, $pwd);
+                $user->setPassword($hash);
+                $manager->persist($user);
+                $manager->flush();
+
+                return $this->redirectToRoute('home');
+            } else {
+                return $this->render('security/pwdmodif.html.twig', [
+                    'formPWD' => $form->createView(),
+                    'error' => "Les mots de passe ne correspondent pas"
+                ]);
+            }
+        }
+
+        return $this->render('security/pwdmodif.html.twig', [
+            'formPWD' => $form->createView(),
+            'error' => NULL
         ]);
     }
 }
