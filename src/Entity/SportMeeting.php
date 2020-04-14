@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\DateTimeTzType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SportMeetingRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SportmeetingRepository")
  */
-class SportMeeting
+class Sportmeeting
 {
     /**
      * @ORM\Id()
@@ -16,6 +15,11 @@ class SportMeeting
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\infrastructure", inversedBy="sportmeetings")
+     */
+    private $infrastructure_id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,19 +32,14 @@ class SportMeeting
     private $type;
 
     /**
-     * @ORM\Column(type="datetimetz")
+     * @ORM\ManyToOne(targetEntity="App\Entity\team", inversedBy="sportmeetings")
      */
-    private $meeting;
+    private $id_team_home;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\team", inversedBy="sportmeetings")
      */
-    private $team_home;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $team_outside;
+    private $id_team_outside;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,24 +47,35 @@ class SportMeeting
     private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Infrastructure", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $infrastructure;
+    private $meeting;
 
     /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
+     * @ORM\Column(type="boolean")
      */
     private $finish;
 
     /**
-     * @ORM\Column(type="integer", options={"default" : 0})
+     * @ORM\Column(type="integer")
      */
-    private $durationMeeting;
+    private $duration_meeting;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getInfrastructureId(): ?infrastructure
+    {
+        return $this->infrastructure_id;
+    }
+
+    public function setInfrastructureId(?infrastructure $infrastructure_id): self
+    {
+        $this->infrastructure_id = $infrastructure_id;
+
+        return $this;
     }
 
     public function getSport(): ?string
@@ -92,40 +102,26 @@ class SportMeeting
         return $this;
     }
 
-    public function getMeeting(): ?DateTimeTzType
+    public function getIdTeamHome(): ?team
     {
-        return $this->meeting;
+        return $this->id_team_home;
     }
 
-
-    public function setMeeting(DateTimeTzType $h_min): self
+    public function setIdTeamHome(?team $id_team_home): self
     {
-        $this->meeting = $meeting;
+        $this->id_team_home = $id_team_home;
 
         return $this;
     }
 
-
-    public function getTeamHome(): ?string
+    public function getIdTeamOutside(): ?team
     {
-        return $this->team_home;
+        return $this->id_team_outside;
     }
 
-    public function setTeamHome(string $team_home): self
+    public function setIdTeamOutside(?team $id_team_outside): self
     {
-        $this->team_home = $team_home;
-
-        return $this;
-    }
-
-    public function getTeamOutside(): ?string
-    {
-        return $this->team_outside;
-    }
-
-    public function setTeamOutside(string $team_outside): self
-    {
-        $this->team_outside = $team_outside;
+        $this->id_team_outside = $id_team_outside;
 
         return $this;
     }
@@ -142,14 +138,14 @@ class SportMeeting
         return $this;
     }
 
-    public function getInfrastructure(): ?Infrastructure
+    public function getMeeting(): ?\DateTimeInterface
     {
-        return $this->infrastructure;
+        return $this->meeting;
     }
 
-    public function setInfrastructure(Infrastructure $infrastructure): self
+    public function setMeeting(\DateTimeInterface $meeting): self
     {
-        $this->infrastructure = $infrastructure;
+        $this->meeting = $meeting;
 
         return $this;
     }
@@ -168,12 +164,12 @@ class SportMeeting
 
     public function getDurationMeeting(): ?int
     {
-        return $this->durationMeeting;
+        return $this->duration_meeting;
     }
 
-    public function setDurationMeeting(int $durationMeeting): self
+    public function setDurationMeeting(int $duration_meeting): self
     {
-        $this->durationMeeting = $durationMeeting;
+        $this->duration_meeting = $duration_meeting;
 
         return $this;
     }

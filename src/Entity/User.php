@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -53,7 +54,7 @@ class User implements UserInterface
     private $cle;
 
     /**
-     * @ORM\Column(type="integer", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":0})
      */
     private $activate;
 
@@ -123,12 +124,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getActivate(): ?int
+    public function getActivate(): ?bool
     {
         return $this->activate;
     }
 
-    public function setActivate(int $activate): self
+    public function setActivate(bool $activate): self
     {
         $this->activate = $activate;
 
