@@ -16,13 +16,15 @@
 		<match>
 			<div class="categoryDisplay-displayAll">
 				<h3 class='categoryDisplay-titleh3'>{{ match.sport }},
-					{{ match.type }}</h3>
-				<h4 class='categoryDisplay-titleh4'>{{ match.name }}</h4>
+					{{ match.competition }}</h3>
+				<h4 class='categoryDisplay-titleh4'>{{ match.getInfrastructure().name }}</h4>
 				<table class='categoryDisplay-tableDisplayMeeting'>
 					<tbody>
 						<tr>
-							<td class='categoryDisplay-tdDisplayMeeting'><img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
-								{{ match.team_home }}</td>
+							<td class='categoryDisplay-tdDisplayMeeting'>
+								<a href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : app.request.attributes.get('categorie') }) }}">
+									<img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}" height="64" width="64"></a>
+								{{ match.getTeamHome().name }}</td>
 							<td class='categoryDisplay-tdDisplayMeeting'>
 								{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
 									<div class='categoryDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
@@ -34,7 +36,8 @@
 									</div>
 								{% endif %}
 							</td>
-							<td class='categoryDisplay-tdDisplayMeeting'>{{ match.team_outside }}<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64"></td>
+							<td class='categoryDisplay-tdDisplayMeeting'>{{ match.getTeamOutside().name }}<a href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : app.request.attributes.get('categorie') }) }}"><img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}" height="64" width="64"></a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

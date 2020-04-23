@@ -17,40 +17,42 @@ class Favorites
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="favorites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favorites")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $user_id;
+    private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\team", inversedBy="favorites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="favorites")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $team_id;
+    private $team;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?user
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?user $user_id): self
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getTeamId(): ?team
+    public function getTeam(): ?Team
     {
-        return $this->team_id;
+        return $this->team;
     }
 
-    public function setTeamId(?team $team_id): self
+    public function setTeam(?Team $team): self
     {
-        $this->team_id = $team_id;
+        $this->team = $team;
 
         return $this;
     }

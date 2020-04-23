@@ -34,19 +34,39 @@ class Team
     private $logo;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Favorites", mappedBy="team_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sportmeeting", mappedBy="team_home")
+     */
+    private $sportmeeting;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorites", mappedBy="team")
      */
     private $favorites;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sportmeeting", mappedBy="id_team_home")
+     * @ORM\Column(type="string", length=255)
      */
-    private $sportmeetings;
+    private $abbreviation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $president_name;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Infrastructure", cascade={"persist", "remove"})
+     */
+    private $infrastructure;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $trainer;
 
     public function __construct()
     {
+        $this->sportmeeting = new ArrayCollection();
         $this->favorites = new ArrayCollection();
-        $this->sportmeetings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,6 +111,37 @@ class Team
     }
 
     /**
+     * @return Collection|Sportmeeting[]
+     */
+    public function getSportmeeting(): Collection
+    {
+        return $this->sportmeeting;
+    }
+
+    public function addSportmeeting(Sportmeeting $sportmeeting): self
+    {
+        if (!$this->sportmeeting->contains($sportmeeting)) {
+            $this->sportmeeting[] = $sportmeeting;
+            $sportmeeting->setTeamHome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSportmeeting(Sportmeeting $sportmeeting): self
+    {
+        if ($this->sportmeeting->contains($sportmeeting)) {
+            $this->sportmeeting->removeElement($sportmeeting);
+            // set the owning side to null (unless already changed)
+            if ($sportmeeting->getTeamHome() === $this) {
+                $sportmeeting->setTeamHome(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Favorites[]
      */
     public function getFavorites(): Collection
@@ -102,7 +153,7 @@ class Team
     {
         if (!$this->favorites->contains($favorite)) {
             $this->favorites[] = $favorite;
-            $favorite->setTeamId($this);
+            $favorite->setTeam($this);
         }
 
         return $this;
@@ -113,41 +164,58 @@ class Team
         if ($this->favorites->contains($favorite)) {
             $this->favorites->removeElement($favorite);
             // set the owning side to null (unless already changed)
-            if ($favorite->getTeamId() === $this) {
-                $favorite->setTeamId(null);
+            if ($favorite->getTeam() === $this) {
+                $favorite->setTeam(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|Sportmeeting[]
-     */
-    public function getSportmeetings(): Collection
+    public function getAbbreviation(): ?string
     {
-        return $this->sportmeetings;
+        return $this->abbreviation;
     }
 
-    public function addSportmeeting(Sportmeeting $sportmeeting): self
+    public function setAbbreviation(string $abbreviation): self
     {
-        if (!$this->sportmeetings->contains($sportmeeting)) {
-            $this->sportmeetings[] = $sportmeeting;
-            $sportmeeting->setIdTeamHome($this);
-        }
+        $this->abbreviation = $abbreviation;
 
         return $this;
     }
 
-    public function removeSportmeeting(Sportmeeting $sportmeeting): self
+    public function getPresidentName(): ?string
     {
-        if ($this->sportmeetings->contains($sportmeeting)) {
-            $this->sportmeetings->removeElement($sportmeeting);
-            // set the owning side to null (unless already changed)
-            if ($sportmeeting->getIdTeamHome() === $this) {
-                $sportmeeting->setIdTeamHome(null);
-            }
-        }
+        return $this->president_name;
+    }
+
+    public function setPresidentName(string $president_name): self
+    {
+        $this->president_name = $president_name;
+
+        return $this;
+    }
+
+    public function getInfrastructure(): ?Infrastructure
+    {
+        return $this->infrastructure;
+    }
+
+    public function setInfrastructure(?Infrastructure $infrastructure): self
+    {
+        $this->infrastructure = $infrastructure;
+
+        return $this;
+    }
+
+    public function getTrainer(): ?string
+    {
+        return $this->trainer;
+    }
+
+    public function setTrainer(string $trainer): self
+    {
+        $this->trainer = $trainer;
 
         return $this;
     }

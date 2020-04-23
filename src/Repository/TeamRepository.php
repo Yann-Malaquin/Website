@@ -47,4 +47,15 @@ class TeamRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findTeambyName($surname, $sport)
+    {
+        $qb =  $this->createQueryBuilder('t')
+            ->select('t')
+            ->andWhere('t.sport = :sport', 't.abbreviation = :abbreviation')
+            ->setParameter('abbreviation', $surname)
+            ->setParameter('sport', $sport);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

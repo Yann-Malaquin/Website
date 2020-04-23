@@ -1,3 +1,8 @@
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+
 .profil-picture {
     display: block;
     border-radius:50%;
@@ -8,4 +13,12 @@
     width: 128px;
     height: 128px;
     border-style: solid;
+}
+
+.team-figcaptionTrainer{
+    text-align: center;
+    padding-top: 3px;
+    width:256px;
+    margin-bottom: 100px;
+    font-family: "Roman";
 }

@@ -4,39 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	{{ encore_entry_link_tags('css/div') }}
-	{{ encore_entry_link_tags('css/span') }}
-	{{ encore_entry_link_tags('css/title') }}
-	{{ encore_entry_link_tags('css/p') }}
-	{{ encore_entry_link_tags('css/link') }}
-	{{ encore_entry_link_tags('css/table') }}
+{{ encore_entry_link_tags('css/div') }}
+{{ encore_entry_link_tags('css/span') }}
+{{ encore_entry_link_tags('css/title') }}
+{{ encore_entry_link_tags('css/p') }}
+{{ encore_entry_link_tags('css/link') }}
+{{ encore_entry_link_tags('css/table') }}
 
 
-	{% for match in matchs %}
-		<match>
-			<div class="homeDisplay-displayAll">
-				<h3 class='homeDisplay-titleh3'>{{ match.sport }},
-					{{ match.type }}</h3>
-				<h4 class='homeDisplay-titleh4'>{{ match.name }}</h4>
+{% for match in matchs %}
+	<match>
+		<div class="homeDisplay-displayAll">
+			<h3 class='homeDisplay-titleh3'>{{ match.sport }},
+				{{ match.competition }}</h3>
+			<h4 class='homeDisplay-titleh4'>{{ match.getInfrastructure().name }}</h4>
+
+			<tbody>
 				<table class='homeDisplay-tableDisplayMeeting'>
-					<tbody>
-						<tr>
-							<td class='homeDisplay-tdDisplayMeeting'><img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_home ~'.png') }}" height="64" width="64">
-								{{ match.team_home }}</td>
-							<td class='homeDisplay-tdDisplayMeeting'>
-								<div class='homeDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
-								</div>
-							</td>
-							<td class='homeDisplay-tdDisplayMeeting'>{{ match.team_outside }}<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.team_outside ~'.png') }}" height="64" width="64"></td>
+					<tr>
+						<td class='homeDisplay-tdDisplayMeeting'><img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().name ~'.png') }}" height="64" width="64">
+							{{ match.getTeamHome().name }}</td>
 
-						</tr>
-					</tbody>
-				</table>
-				<p>
-					<a class='homeDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
-				</p>
-			</div>
-		</match>
-	{% endfor %}
-	{% block javascript %}{% endblock %}
-{% endblock %}
+						<td class='homeDisplay-tdDisplayMeeting'>
+							<div class='homeDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
+							</div>
+						</td>
+						<td class='homeDisplay-tdDisplayMeeting'>{{ match.getTeamOutside().name }}<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().name ~'.png') }}" height="64" width="64"></td>
+
+
+					</tr>
+				</tbody>
+			</tbody>
+		</table>
+
+		<p>
+			<a class='homeDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+		</p>
+	</div>
+</match>{% endfor %}{% block javascript %}{% endblock %}{% endblock %}

@@ -44,9 +44,10 @@ class Infrastructure
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sportmeeting", mappedBy="infrastructure_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sportmeeting", mappedBy="infrastructure")
      */
     private $sportmeetings;
+
 
     public function __construct()
     {
@@ -130,7 +131,7 @@ class Infrastructure
     {
         if (!$this->sportmeetings->contains($sportmeeting)) {
             $this->sportmeetings[] = $sportmeeting;
-            $sportmeeting->setInfrastructureId($this);
+            $sportmeeting->setInfrastructure($this);
         }
 
         return $this;
@@ -141,8 +142,8 @@ class Infrastructure
         if ($this->sportmeetings->contains($sportmeeting)) {
             $this->sportmeetings->removeElement($sportmeeting);
             // set the owning side to null (unless already changed)
-            if ($sportmeeting->getInfrastructureId() === $this) {
-                $sportmeeting->setInfrastructureId(null);
+            if ($sportmeeting->getInfrastructure() === $this) {
+                $sportmeeting->setInfrastructure(null);
             }
         }
 

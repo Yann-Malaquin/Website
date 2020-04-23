@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\SportMeeting;
+use App\Entity\Sportmeeting;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,7 +38,7 @@ class HomeController extends AbstractController
     {
         $date = date("Y-m-d");
         $matchs = $this->getDoctrine()
-            ->getRepository(SportMeeting::class)
+            ->getRepository(Sportmeeting::class)
             ->findAllMeetingofDay($city, $date);
 
         return $this->render('home/homeDisplay.html.twig', [

@@ -17,9 +17,10 @@ class Sportmeeting
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\infrastructure", inversedBy="sportmeetings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Infrastructure", inversedBy="sportmeetings")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $infrastructure_id;
+    private $infrastructure;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -29,17 +30,19 @@ class Sportmeeting
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private $competition;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\team", inversedBy="sportmeetings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="sportmeeting")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_team_home;
+    private $team_home;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\team", inversedBy="sportmeetings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="sportmeeting")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_team_outside;
+    private $team_outside;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -54,7 +57,7 @@ class Sportmeeting
     /**
      * @ORM\Column(type="boolean")
      */
-    private $finish;
+    private $isfinish;
 
     /**
      * @ORM\Column(type="integer")
@@ -66,14 +69,14 @@ class Sportmeeting
         return $this->id;
     }
 
-    public function getInfrastructureId(): ?infrastructure
+    public function getInfrastructure(): ?Infrastructure
     {
-        return $this->infrastructure_id;
+        return $this->infrastructure;
     }
 
-    public function setInfrastructureId(?infrastructure $infrastructure_id): self
+    public function setInfrastructure(?Infrastructure $infrastructure): self
     {
-        $this->infrastructure_id = $infrastructure_id;
+        $this->infrastructure = $infrastructure;
 
         return $this;
     }
@@ -90,38 +93,38 @@ class Sportmeeting
         return $this;
     }
 
-    public function getType(): ?string
+    public function getCompetition(): ?string
     {
-        return $this->type;
+        return $this->competition;
     }
 
-    public function setType(string $type): self
+    public function setCompetition(string $competition): self
     {
-        $this->type = $type;
+        $this->competition = $competition;
 
         return $this;
     }
 
-    public function getIdTeamHome(): ?team
+    public function getTeamHome(): ?Team
     {
-        return $this->id_team_home;
+        return $this->team_home;
     }
 
-    public function setIdTeamHome(?team $id_team_home): self
+    public function setTeamHome(?Team $team_home): self
     {
-        $this->id_team_home = $id_team_home;
+        $this->team_home = $team_home;
 
         return $this;
     }
 
-    public function getIdTeamOutside(): ?team
+    public function getTeamOutside(): ?Team
     {
-        return $this->id_team_outside;
+        return $this->team_outside;
     }
 
-    public function setIdTeamOutside(?team $id_team_outside): self
+    public function setTeamOutside(?Team $team_outside): self
     {
-        $this->id_team_outside = $id_team_outside;
+        $this->team_outside = $team_outside;
 
         return $this;
     }
@@ -150,14 +153,14 @@ class Sportmeeting
         return $this;
     }
 
-    public function getFinish(): ?bool
+    public function getIsfinish(): ?bool
     {
-        return $this->finish;
+        return $this->isfinish;
     }
 
-    public function setFinish(bool $finish): self
+    public function setIsfinish(bool $isfinish): self
     {
-        $this->finish = $finish;
+        $this->isfinish = $isfinish;
 
         return $this;
     }

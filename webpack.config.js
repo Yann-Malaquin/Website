@@ -42,6 +42,7 @@ Encore
     .addStyleEntry('css/table', './assets/css/table.css')
     .addStyleEntry('css/title', './assets/css/title.css')
     .addStyleEntry('css/ul', './assets/css/ul.css')
+    .addStyleEntry('css/figure', './assets/css/figure.css')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
