@@ -37,6 +37,10 @@ class ProfilController extends AbstractController
         $imagetmp = $profil->getImage();
         $form->handleRequest($request);
 
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadFile $image */
@@ -67,7 +71,6 @@ class ProfilController extends AbstractController
                 $profil->setImage($name);
             } else {
                 $name = $imagetmp;
-                dump($name);
             }
 
             $profil->setImage($name);
@@ -78,7 +81,8 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/profil.html.twig', [
             'formProfil' => $form->createView(),
-            'srcImage' => '/profil/' . $profil->getImage()
+            'srcImage' => '/profil/' . $profil->getImage(),
+            'sports' => $sports
         ]);
     }
 
@@ -89,7 +93,6 @@ class ProfilController extends AbstractController
     public function modificationpwd(Request $request, EntityManagerInterface $manager,  UserPasswordEncoderInterface $encoder, $username)
     {
         $user = $this->urepository->findOneBy(['username' => $username]);
-
 
         $manager = $this->getDoctrine()->getManager();
         $form = $this->createFormBuilder()

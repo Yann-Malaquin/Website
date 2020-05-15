@@ -27,10 +27,16 @@ class MapController extends AbstractController
      * @Route("/map/city={city}", name="map")
      * @return void
      */
-    public function indexCity()
+    public function indexCity($city)
     {
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
+
         return $this->render('map/map.html.twig', [
             'controller_name' => 'MapController',
+            'sports' => $sports
         ]);
     }
 
@@ -39,8 +45,14 @@ class MapController extends AbstractController
      */
     public function index()
     {
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
+
         return $this->render('map/map.html.twig', [
             'controller_name' => 'MapController',
+            'sports' => $sports
         ]);
     }
 

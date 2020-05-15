@@ -7,11 +7,12 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
-    width: 600px;
+    width: 800px;
+    table-layout:fixed;
 }
 
 .homeDisplay-tdDisplayMeeting{
-    width: 200px;
+    width: 250px;
     vertical-align: center;
 }
 
@@ -26,6 +27,7 @@
 .categoryDisplay-tdDisplayMeeting{
     width: 250px;
     vertical-align: center;
+    font-size:16px;
 }
 
 .team-tableDisplay{

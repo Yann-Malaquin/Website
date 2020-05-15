@@ -47,4 +47,17 @@ class FavoritesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findFavoritesbyUser($username)
+    {
+        $qb = $this->createQueryBuilder('f')
+            ->select('f')
+            ->andwhere('t.id = f.team', 'u.username = :username')
+            ->join('f.user', 'u')
+            ->join('f.team', 't')
+            ->setParameter('username', $username);
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
@@ -218,5 +219,19 @@ class Team
         $this->trainer = $trainer;
 
         return $this;
+    }
+
+    /**
+     * Permet de savoir si l'équipe est en favoris d'un utilisateur
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function isFavoritedbyUser(User $user): bool
+    {
+        foreach ($this->favorites as $favorite) {
+            if ($favorite->getUser() === $user) return true;
+        }
+        return false;
     }
 }

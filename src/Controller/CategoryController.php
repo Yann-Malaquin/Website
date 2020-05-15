@@ -14,15 +14,20 @@ class CategoryController extends AbstractController
     public function index($categorie, $city)
     {
 
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
+
         $matchs = $this->getDoctrine()
             ->getRepository(Sportmeeting::class)
             ->findBySport($city, $categorie);
 
-        dump($matchs);
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CategoryController',
             'title' => $categorie,
-            'matchs' => $matchs
+            'matchs' => $matchs,
+            'sports' => $sports
         ]);
     }
 }

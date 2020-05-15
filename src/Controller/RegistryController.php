@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Profil;
+use App\Entity\Sportmeeting;
 use App\Form\RegistrationType;
 use App\Notification\MailNotification;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,11 @@ class RegistryController extends AbstractController
 
         $form = $this->createForm(RegistrationType::class, $user);
 
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
+
 
         $form->handleRequest($request);
 
@@ -47,7 +53,8 @@ class RegistryController extends AbstractController
         }
 
         return $this->render('registry/registry.html.twig', [
-            'formRegistration' => $form->createView()
+            'formRegistration' => $form->createView(),
+            'sports' => $sports
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Sportmeeting;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,10 +21,15 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login/city={city}", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, $city): Response
     {
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            $user = $this->getUser();
+            return $this->redirectToRoute('homeDisplayConnected', ['city' => $city, 'username' => $user->getUsername()]);
         }
 
         // get the login error if there is one
@@ -31,7 +37,11 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'sports' => $sports
+        ]);
     }
 
     /**
@@ -48,7 +58,6 @@ class SecurityController extends AbstractController
     public function activation(EntityManagerInterface $manager, $username, $cle)
     {
 
-        dump([$username, $cle]);
         $user = $this->urepository->findOneBy(['username' => $username]);
 
         if ($user->getActivate() != '1') {

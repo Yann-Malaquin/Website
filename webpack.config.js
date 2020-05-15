@@ -26,6 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('js/map', './assets/js/map.js')
     .addEntry('js/home', './assets/js/home.js')
+    .addEntry('js/favorite', './assets/js/favorite.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -43,7 +44,7 @@ Encore
     .addStyleEntry('css/title', './assets/css/title.css')
     .addStyleEntry('css/ul', './assets/css/ul.css')
     .addStyleEntry('css/figure', './assets/css/figure.css')
-
+    .addStyleEntry('css/icone', './assets/css/icone.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

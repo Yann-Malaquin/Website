@@ -78,6 +78,20 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findAllSport($city)
+    {
+        $qb =  $this->createQueryBuilder('s')
+            ->select('s.sport')
+            ->distinct(true)
+            ->orderBy('s.meeting', 'DESC')
+            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 'h.id = s.team_home', 'o.id = s.team_outside')
+            ->join('s.infrastructure', 'i')
+            ->join('s.team_home', 'h')
+            ->join('s.team_outside', 'o')
+            ->setParameter('city', $city);
+
+        return $qb->getQuery()->getResult();
+    }
 
     public function findBySport($city, $sport)
     {
@@ -90,6 +104,67 @@ class SportmeetingRepository extends ServiceEntityRepository
             ->join('s.team_outside', 'o')
             ->setParameter('city', $city)
             ->setParameter('sport', $sport);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findMeetingsbyTeam($team_id)
+    {
+
+        $qb =  $this->createQueryBuilder('s')
+            ->select('s')
+            ->andWhere('h.id = :team_id')
+            ->orWhere('o.id = :team_id')
+            ->orderBy('s.meeting', 'ASC')
+            ->join('s.team_home', 'h')
+            ->join('s.team_outside', 'o')
+            ->setParameter('team_id', $team_id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findMeetingsofDaybyTeam($team_id, $city, $date)
+    {
+
+        $qb =  $this->createQueryBuilder('s')
+            ->select('s')
+            ->andWhere('i.city = :city', 'i.id = s.infrastructure', 'h.id = :team_id', 's.meeting LIKE :date')
+            ->orderBy('s.meeting', 'ASC')
+            ->join('s.team_home', 'h')
+            ->join('s.infrastructure', 'i')
+            ->setParameter('team_id', $team_id)
+            ->setParameter('city', $city)
+            ->setParameter('date', $date . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findSportbyTeam($team_id)
+    {
+        $qb =  $this->createQueryBuilder('s')
+            ->select('s.sport')
+            ->distinct(true)
+            ->andWhere('h.id = :team_id')
+            ->orWhere('o.id = :team_id')
+            ->orderBy('s.sport', 'ASC')
+            ->join('s.team_home', 'h')
+            ->join('s.team_outside', 'o')
+            ->setParameter('team_id', $team_id);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findMeetingbyUsername($username)
+    {
+        $qb =  $this->createQueryBuilder('s')
+            ->select('s.sport')
+            ->distinct(true)
+            ->andWhere('h.id = :team_id')
+            ->orWhere('o.id = :team_id')
+            ->orderBy('s.sport', 'ASC')
+            ->join('s.team_home', 'h')
+            ->join('s.team_outside', 'o')
+            ->setParameter('username', $username);
 
         return $qb->getQuery()->getResult();
     }

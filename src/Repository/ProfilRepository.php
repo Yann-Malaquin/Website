@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Profil;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Select;
 
 /**
  * @method Profil|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,21 @@ class ProfilRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Renvoie le pseudo et l'image d'un utilisateur
+     *
+     * @param [type] $username
+     * @return void
+     */
+    public function findUserbyUsername($username)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('u.username', 'p.image')
+            ->andWhere('u.username = :username', 'u.id = p.user')
+            ->join('p.user', 'u')
+            ->setParameter('username', $username);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

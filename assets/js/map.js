@@ -101,9 +101,6 @@ function createMap() {
   L.mapquest.geocoding().reverse([latitude, longitude], generatePopupContent);
 }
 
-
-
-
 window.onload = function () {
   createMap();
 }
