@@ -12,6 +12,7 @@ Pré-requis pour utiliser le site web
 - Symfony 5
 - Wamp
 - Node.js
+- Télécharger projet depuis branche master
 
 BDD
 - importer la BDD sous le nom eventsportif
