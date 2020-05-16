@@ -3,7 +3,7 @@
     src : url("/public/font/Roman_SD.ttf");
 }
 
-.profil-label{
+.css-profilLabel{
     margin:0 10%;
     display: inline-block;
     width:100px;
@@ -12,7 +12,7 @@
     color:black;
 }
 
-.profil-notification{
+.css-profilNotification{
     width:400px;
     margin-left:10%;
     margin-bottom: 5%;
@@ -23,7 +23,7 @@
     color:black;
 }
 
-.registry-label{
+.css-registryLabel{
     margin-top:20px;
     margin-right : 30px;
     display: inline-block;
@@ -33,20 +33,11 @@
     color:black;
 }
 
-.login-label{
+.css-loginLabel{
     margin-top:60px;
     margin-right : 30px;
     display: inline-block;
     width:180px;
-    font-size: 20px;
-    font-family: "Roman";
-    color:black;
-}
-
-.password-label{
-    margin-top:60px;
-    display: inline-block;
-    width:250px;
     font-size: 20px;
     font-family: "Roman";
     color:black;

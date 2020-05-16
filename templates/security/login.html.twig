@@ -10,13 +10,13 @@
 	{{ encore_entry_link_tags('css/button') }}
 
 
-	<div class='login-title'>
+	<div class='css-loginTitle'>
 
 		<h1>Connexion</h1>
 	</div>
 
-	<div class='login-displayLogin'>
-		<div class='login-form'>
+	<div class='css-login'>
+		<div class='css-loginForm'>
 
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -24,12 +24,12 @@
 
 			<form method="post">
 				<div class='form-group'>
-					<label for="inputUsername" class='login-label'>Nom d'utilisateur</label>
-					<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class='login-input' required autofocus>
+					<label for="inputUsername" class='css-loginLabel'>Nom d'utilisateur</label>
+					<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class='css-loginInput' required autofocus>
 				</div>
 				<div class='form-group'>
-					<label for="inputPassword" class='login-label'>Mot de passe</label>
-					<input type="password" name="password" id="inputPassword" class='login-input' required>
+					<label for="inputPassword" class='css-loginLabel'>Mot de passe</label>
+					<input type="password" name="password" id="inputPassword" class='css-loginInput' required>
 				</div>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

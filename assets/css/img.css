@@ -3,7 +3,7 @@
     src : url("/public/font/Roman_SD.ttf");
 }
 
-.profil-picture{
+.css-profilPicture{
     display: block;
     border-radius:50%;
     margin-left:auto;
@@ -15,7 +15,7 @@
     border-style: solid;
 }
 
-.team-figcaptionTrainer{
+.css-teamFigcaptionTrainer{
     text-align: center;
     padding-top: 3px;
     width:256px;

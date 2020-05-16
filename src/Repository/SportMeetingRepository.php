@@ -49,7 +49,12 @@ class SportmeetingRepository extends ServiceEntityRepository
     }
     */
 
-
+    /**
+     * Permet de trouver toutes les infrastructure d'une ville et du jours(utile pour la carte)
+     *
+     * @param  $city
+     * @param  $date
+     */
     public function findAllLocation($city, $date)
     {
         $qb =  $this->createQueryBuilder('s')
@@ -63,6 +68,13 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+    /**
+     * Trouve les événements du jour et d'une ville
+     *
+     * @param $city
+     * @param  $date
+     */
     public function findAllMeetingofDay($city, $date)
     {
         $qb =  $this->createQueryBuilder('s')
@@ -78,6 +90,11 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Trouve tous les sports en rapport avec une ville (pour les catégories)
+     *
+     * @param  $city
+     */
     public function findAllSport($city)
     {
         $qb =  $this->createQueryBuilder('s')
@@ -93,6 +110,12 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Trouve les événements grâce au sport(notamment lors du clique sur la catégorie)
+     *
+     * @param  $city
+     * @param $sport
+     */
     public function findBySport($city, $sport)
     {
         $qb =  $this->createQueryBuilder('s')
@@ -108,6 +131,11 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Retrouve les événements grâce à l'id d'une équipe (lorsque l'on recherche avec les favoris)
+     *
+     * @param  $team_id
+     */
     public function findMeetingsbyTeam($team_id)
     {
 
@@ -123,6 +151,13 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Trouve les événements du jour d'une équipe
+     *
+     * @param  $team_id
+     * @param  $city
+     * @param  $date
+     */
     public function findMeetingsofDaybyTeam($team_id, $city, $date)
     {
 
@@ -139,6 +174,11 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Retrouver le sport d'une équipe grâce à son ID
+     *
+     * @param  $team_id
+     */
     public function findSportbyTeam($team_id)
     {
         $qb =  $this->createQueryBuilder('s')
@@ -154,6 +194,11 @@ class SportmeetingRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Retrouver les événements grâce au nom d'utilisateur (pour les favoris)
+     *
+     * @param  $username
+     */
     public function findMeetingbyUsername($username)
     {
         $qb =  $this->createQueryBuilder('s')

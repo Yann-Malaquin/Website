@@ -10,6 +10,9 @@ class CategoryController extends AbstractController
 {
     /**
      * @Route("/categorie/city={city}/categorie={categorie}", name="category")
+     * 
+     * Fonction faisant office de controller pour la page des catégories
+     * Retourne tous les matchs d'une catégorie
      */
     public function index($categorie, $city)
     {

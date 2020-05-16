@@ -3,37 +3,17 @@
     src : url("/public/font/Roman_SD.ttf");
 }
 
-.profil-input{
+.css-profilInput, .css-registryInput, .css-loginInput, .css-passwordInput{
     margin-bottom : 5%;
     font-family: "Roman";
     font-size: 20px;
     height: 30px;
 }
 
-.profil-upload{
+.css-profilUpload{
     font-family: "Roman";
     font-size: 20px;
     margin-left: 10%;
     margin-bottom: 5%;
 }
 
-.registry-input{
-    margin-bottom : 5%;
-    font-family: "Roman";
-    font-size: 20px;
-    height: 30px;
-}
-
-.login-input{
-    margin-bottom : 5%;
-    font-family: "Roman";
-    font-size: 20px;
-    height: 30px;
-}
-
-.password-input{
-    margin-bottom : 5%;
-    font-family: "Roman";
-    font-size: 20px;
-    height: 30px;
-}

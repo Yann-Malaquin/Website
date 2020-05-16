@@ -48,6 +48,12 @@ class TeamRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * Retouver tous les détails d'une équipé grâce à son surnom et son sport
+     *
+     * @param  $surname
+     * @param  $sport
+     */
     public function findTeambyName($surname, $sport)
     {
         $qb =  $this->createQueryBuilder('t')

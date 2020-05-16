@@ -1,20 +1,12 @@
-.homeDisplay-link{
+.css-homeLink, .css-cateogryLink{
     color : white;
 }
 
-.homeDisplay-link:hover{
+.css-homeLink:hover, .css-categoryLink:hover{
     color : white;
 }
 
-.categoryDisplay-link{
-    color : white;
-}
-
-.categoryDisplay-link:hover{
-    color : white;
-}
-
-.a-profil:link{
+.css-profilLink:link{
     display: inline-block;
     margin-left: 10%;
     margin-bottom: 5%;

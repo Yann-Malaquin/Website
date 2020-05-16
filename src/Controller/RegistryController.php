@@ -19,8 +19,10 @@ class RegistryController extends AbstractController
 {
     /**
      * @Route("/inscription/city={city}", name="registry")
+     * 
+     * Correspond à la page d'inscription
      */
-    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder, $city)
     {
 
         $user = new User();

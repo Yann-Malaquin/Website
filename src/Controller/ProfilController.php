@@ -25,10 +25,12 @@ class ProfilController extends AbstractController
 
     /**
      * @Route("/profil/city={city}/{username}", name="profil")
+     * 
+     * Correspond à la page de profil d'un utilisateur
      */
     public function index(Request $request, EntityManagerInterface $manager, $username)
     {
-
+        /* On récupère les données utiles comme l'utilisateur et le lien avec le prof */
         $user = $this->urepository->findOneBy(['username' => $username]);
         $profil = $this->prepository->findOneBy(['email' => $user->getEmail()]);
         $username = $user->getUsername();
@@ -42,6 +44,13 @@ class ProfilController extends AbstractController
             ->getRepository(Sportmeeting::class)
             ->findAllSport($city);
 
+        /**
+         * On vérifie si les données saisies son correctes
+         * - Le type de l'image
+         * - Si toutes les données ont été saisies
+         * 
+         * On renomme l'image avec le pseudo de l'utilisateur et on la transfère dans le dossier profil pour une meilleur organisation
+         */
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadFile $image */
 
@@ -88,6 +97,8 @@ class ProfilController extends AbstractController
 
     /**
      * @Route("/pwdchange/{username}", name="pwdchange")
+     * 
+     * Correspond à la page du changement de mot de passe
      */
 
     public function modificationpwd(Request $request, EntityManagerInterface $manager,  UserPasswordEncoderInterface $encoder, $username)

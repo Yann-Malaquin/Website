@@ -3,7 +3,7 @@
     src : url("/public/font/Roman_SD.ttf");
 }
 
-.homeDisplay-tableDisplayMeeting{
+.css-categoryTableMeeting, .css-homeTableMeeting, .css-favoritesTableMeeting{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
@@ -11,26 +11,13 @@
     table-layout:fixed;
 }
 
-.homeDisplay-tdDisplayMeeting{
-    width: 250px;
-    vertical-align: center;
-}
-
-.categoryDisplay-tableDisplayMeeting{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    width: 800px;
-    table-layout:fixed;
-}
-
-.categoryDisplay-tdDisplayMeeting{
+.css-categoryTdMeeting, .css-homeTdMeeting, .css-favoritesTdMeeting{
     width: 250px;
     vertical-align: center;
     font-size:16px;
 }
 
-.team-tableDisplay{
+.css-teamTable{
     width: 1200px;
     text-align:center;
     margin-left : 700px;
@@ -43,7 +30,7 @@
     
 }
 
-.team-thDisplay{
+.css-teamTh{
     border-left: 1px;
     border-right: 1px;
     border-bottom: 4px;
@@ -56,7 +43,7 @@
     font-family: "Roman";
 }
 
-.team-tdDisplay{
+.css-teamTd{
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -64,7 +51,7 @@
     font-family: "Roman";
 }
 
-.team-caption{
+.css-teamCaption{
     caption-side: top;
     font-size: 36px;
     text-align: center;

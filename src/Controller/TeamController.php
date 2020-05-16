@@ -17,6 +17,9 @@ class TeamController extends AbstractController
 {
     /**
      * @Route("/team/categorie={categorie}/team={team}/city={city}", name="team")
+     * 
+     * Correspond à la page concernant les informations d'une équipe
+     * On retourne les informations par poste
      */
     public function index($categorie, $team)
     {

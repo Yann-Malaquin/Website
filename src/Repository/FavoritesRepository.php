@@ -48,7 +48,11 @@ class FavoritesRepository extends ServiceEntityRepository
     }
     */
 
-
+    /**
+     * Permet de retrouver les favoris d'un utilisateur
+     *
+     * @param $username
+     */
     public function findFavoritesbyUser($username)
     {
         $qb = $this->createQueryBuilder('f')

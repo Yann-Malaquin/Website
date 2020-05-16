@@ -1,24 +1,11 @@
-.homeDisplay-titleh3{
+.css-homeTitleh3, .css-categoryTitleh3, .css-favoritesTitleh3{
     padding-top: 10px;
     padding-bottom: 10px;
     color:white;
     background-color: black;
 }
 
-.homeDisplay-titleh4{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color:white;
-}
-
-.categoryDisplay-titleh3{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color:white;
-    background-color: black;
-}
-
-.categoryDisplay-titleh4{
+.css-homeTitleh4, .css-categoryTitleh4, .css-favoritesTitleh4{
     padding-top: 10px;
     padding-bottom: 10px;
     color:white;

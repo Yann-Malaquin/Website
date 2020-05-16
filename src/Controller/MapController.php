@@ -41,23 +41,10 @@ class MapController extends AbstractController
     }
 
     /**
-     * @Route ("/map" , name="map/")
-     */
-    public function index()
-    {
-        $date = date("Y-m-d");
-        $sports = $this->getDoctrine()
-            ->getRepository(Sportmeeting::class)
-            ->findAllSport($city);
-
-        return $this->render('map/map.html.twig', [
-            'controller_name' => 'MapController',
-            'sports' => $sports
-        ]);
-    }
-
-    /**
      * @Route("/map/{city}")
+     * 
+     * Permet de trouver les événements en rapport avec la ville
+     * Retourne des données en JSON
      */
     public function findPlace(Request $request, $city)
     {

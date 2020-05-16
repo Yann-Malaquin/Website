@@ -52,8 +52,7 @@ class ProfilRepository extends ServiceEntityRepository
     /**
      * Renvoie le pseudo et l'image d'un utilisateur
      *
-     * @param [type] $username
-     * @return void
+     * @param  $username
      */
     public function findUserbyUsername($username)
     {

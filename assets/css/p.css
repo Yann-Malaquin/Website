@@ -3,7 +3,7 @@
     src : url("/public/font/Roman_SD.ttf");
 }
 
-.team-pDisplay{
+.css-pTeam{
     font-family: "Roman";
     font-size : 32px;
 }

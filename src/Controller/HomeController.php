@@ -11,6 +11,8 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/accueil", name="home")
+     * 
+     * Correspond à la page de chargement pour obtenir la localisation de l'utilisateur
      */
     public function index()
     {
@@ -23,6 +25,8 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/", name = "index")
+     * 
+     * Fonction de base
      */
     public function home()
     {
@@ -34,6 +38,9 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/accueil/city={city}", name = "homeDisplay")
+     * 
+     * Concerne l'affichage de la page d'un utilisateur non connecté
+     * Retourne uniquement les événements de la ville du jour
      */
     public function findMeeting($city)
     {
@@ -56,6 +63,9 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/accueil/city={city}/username={username}", name="homeDisplayConnected")
+     * 
+     * Concerne l'affichage de la page d'un utilisateur connecté
+     * Retourne les événements et les favoris,s'il y a, de la ville du jour
      */
 
     public function homeConnected($username, $city)

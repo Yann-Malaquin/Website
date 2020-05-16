@@ -13,6 +13,9 @@ class FavoritesController extends AbstractController
 {
     /**
      * @Route("/favorites/city={city}/username={username}", name="favorites")
+     * 
+     * Fonction faisant office de controller pour les favoris
+     * Elle retourne tous les événements en rapport avec la ou les équipes favorisée(s)
      */
     public function index($username)
     {

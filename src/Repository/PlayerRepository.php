@@ -47,7 +47,12 @@ class PlayerRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    /**
+     * Permet de retrouver les joueurs d'une équipe
+     *
+     * @param  $team
+     * @param  $position
+     */
     public function findbyPosition($team, $position)
     {
         $qb =  $this->createQueryBuilder('p')

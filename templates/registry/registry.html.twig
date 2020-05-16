@@ -9,36 +9,36 @@
 	{{ encore_entry_link_tags('css/input') }}
 	{{ encore_entry_link_tags('css/button') }}
 
-	<div class='registry-title'>
+	<div class='css-registryTitle'>
 		<h1>Inscription</h1>
 	</div>
-	<div class='registry-displayRegistry'>
+	<div class='css-registry'>
 		{{ form_start(formRegistration)}}
 
-		<div class='registry-form'>
+		<div class='css-registryForm'>
 			<div class="form-group">
-				{{ form_label(formRegistration.email, 'Email', {'label_attr': {'class': 'registry-label'}}) }}
-				{{ form_widget(formRegistration.email, {'attr' : {'placeholder' : 'michel.dupont@example.com', 'class' : 'registry-input'}}) }}
+				{{ form_label(formRegistration.email, 'Email', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.email, {'attr' : {'placeholder' : 'michel.dupont@example.com', 'class' : 'css-registryInput'}}) }}
 
 			</div>
 
 			<div class="form-group">
-				{{ form_label(formRegistration.username, 'Nom d utilisateur', {'label_attr': {'class': 'registry-label'}}) }}
+				{{ form_label(formRegistration.username, 'Nom d utilisateur', {'label_attr': {'class': 'css-registryLabel'}}) }}
 
-				{{ form_widget(formRegistration.username, {'attr' : {'placeholder' : 'Mimi', 'class' : 'registry-input'}}) }}
-
-			</div>
-
-			<div class="form-group">
-				{{ form_label(formRegistration.password, 'Mot de passe', {'label_attr': {'class': 'registry-label'}}) }}
-				{{ form_widget(formRegistration.password, { 'attr' : {'placeholder' : 'Azerty123', 'class' : 'registry-input'}}) }}
-
+				{{ form_widget(formRegistration.username, {'attr' : {'placeholder' : 'Mimi', 'class' : 'css-registryInput'}}) }}
 
 			</div>
 
 			<div class="form-group">
-				{{ form_label(formRegistration.confirm_password, 'Confirmer mot de passe', {'label_attr': {'class': 'registry-label'}}) }}
-				{{ form_widget(formRegistration.confirm_password, {'attr' : {'placeholder' : 'Azerty123', 'class' : 'registry-input'}}) }}
+				{{ form_label(formRegistration.password, 'Mot de passe', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.password, { 'attr' : {'placeholder' : 'Azerty123', 'class' : 'css-registryInput'}}) }}
+
+
+			</div>
+
+			<div class="form-group">
+				{{ form_label(formRegistration.confirm_password, 'Confirmer mot de passe', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.confirm_password, {'attr' : {'placeholder' : 'Azerty123', 'class' : 'css-registryInput'}}) }}
 
 			</div>
 

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{# Affichage de tous les événements d'une catégorie précise'#}
+
 {% block title %}Catégorie |
 	{{title}}
 {% endblock %}
@@ -8,62 +10,25 @@
 	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
 
 	{{ encore_entry_link_tags('css/div') }}
-	{{ encore_entry_link_tags('css/span') }}
 	{{ encore_entry_link_tags('css/title') }}
 	{{ encore_entry_link_tags('css/p') }}
 	{{ encore_entry_link_tags('css/link') }}
 	{{ encore_entry_link_tags('css/table') }}
 
-	<style>
-		.css-homeDisplayDisconnected,
-		.css-homeDisplayConnected {
-			margin: 80px auto;
-			text-align: center;
-		}
-
-		.css-meetingDisplayToday {
-			margin: 40px auto;
-		}
-
-		.css-showMeetingsToday {
-			display: inline-block;
-			margin: 20px auto;
-			padding: 40px;
-			border: 4px solid;
-			border-radius: 20px;
-		}
-
-		.homeDisplay-displayAll {
-			background-color: darkslategrey;
-			display: block;
-			max-width: 800px;
-			margin: 80px auto;
-			border-style: solid;
-			border-color: black;
-			color: white;
-			text-align: center;
-		}
-
-		.css-columnEvent {
-			display: inline-block;
-			position: static;
-			margin: 40px auto;
-			text-align: center;
-			padding: 20px;
-		}
-	</style>
-	<div class="css-homeDisplayDisconnected">
-		<div class="css-showMeetingsToday">
+	<div class="css-category">
+		<div
+			class="css-divCatDisplay">
+			{# On affiche tous les événements. Si l'on est connecté on peut ajouter en favoris'#}
 			{% for match in matchs %}
 				<match>
-					<div class="categoryDisplay-displayAll">
-						<h3 class='categoryDisplay-titleh3'>{{ match.sport }},
+					<div class="css-divCategoryDisplay">
+						<h3 class='css-categoryTitleh3'>{{ match.sport }},
 							{{ match.competition }}</h3>
-						<h4 class='categoryDisplay-titleh4'>{{ match.getInfrastructure().name }}</h4>
-						<table class='categoryDisplay-tableDisplayMeeting'>
+						<h4 class='css-categoryTitleh4'>{{ match.getInfrastructure().name }}</h4>
+						<table class='css-categoryTableMeeting'>
 							<tbody>
 								<tr>
-									<td class='categoryDisplay-tdDisplayMeeting'>
+									<td class='css-categoryTdMeeting'>
 										<a href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : app.request.attributes.get('categorie') }) }}">
 											<img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}" height="64" width="64"></a>
 										{{ match.getTeamHome().name }}
@@ -78,18 +43,18 @@
 										</a>
 									</td>
 
-									<td class='categoryDisplay-tdDisplayMeeting'>
+									<td class='css-categoryTdMeeting'>
 										{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
-											<div class='categoryDisplay-dateDisplay'>{{ match.meeting|date("G:i") }}
+											<div class='css-categoryDate'>{{ match.meeting|date("G:i") }}
 											</div>
 										{% else %}
-											<div class='categoryDisplay-dateDisplay'>
+											<div class='css-categoryDate'>
 												{{ match.meeting|date("G:i") }}<br>
 												{{ match.meeting|date("d-m-Y")}}
 											</div>
 										{% endif %}
 									</td>
-									<td class='categoryDisplay-tdDisplayMeeting'>
+									<td class='css-categoryTdMeeting'>
 										<a class="js-fav" href="{{path('team_favorite',{'id' : match.getTeamOutside().id}) }}">
 											{% if app.user %}
 												{% if match.getTeamOutside().isFavoritedbyUser(app.user) %}
@@ -109,7 +74,7 @@
 						</table>
 						<p>
 							{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
-								<a class='categoryDisplay-link' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+								<a class='css-categoryLink' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
 							{% endif %}
 						</p>
 					</div>
