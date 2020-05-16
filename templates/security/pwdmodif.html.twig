@@ -1,0 +1,40 @@
+{% extends 'base2.html.twig' %}
+{# page permettant la modification du mot de passse de l'utilisateur #}
+{% block title %}Modification mot de passe
+{% endblock %}
+
+{% block body %}
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/label') }}
+	{{ encore_entry_link_tags('css/input') }}
+	{{ encore_entry_link_tags('css/button') }}
+
+
+	<div class='css-passwordTitle'>
+		<h1>Modification mot de passe</h1>
+	</div>
+	<div class="css-password">
+		<div class='css-passwordForm'>
+			{{ form_start(formPWD) }}
+
+			{% if error is not null %}
+				<p>{{ error }}</p>
+			{% endif %}
+			<div class="div">
+				{{ form_label(formPWD.pwd, 'Mot de passe', {'label_attr': {'class': 'css-passwordLabel'}}) }}
+				{{ form_widget(formPWD.pwd, {'name' : 'pwd' ,'attr': {'class': 'css-passwordInput'}}) }}
+
+			</div>
+			<div>
+				{{ form_label(formPWD.confirmPwd, 'Confirmer mot de passe ', {'label_attr': {'class': 'css-passwordLabel'}}) }}
+				{{ form_widget(formPWD.confirmPwd, {'name' : 'confirmPwd', 'attr': {'class': 'css-passwordInput'}}) }}
+			</div>
+			<div class="form">
+				<button type="submit" name="modification" value="modification" class="btn btn-primary css-passwordModification">Modifier</button>
+			</div>
+			{{ form_end(formPWD) }}
+
+		</div>
+	</div>
+
+{% endblock %}

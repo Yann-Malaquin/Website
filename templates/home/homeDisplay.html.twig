@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+{{ encore_entry_link_tags('css/div') }}
+{{ encore_entry_link_tags('css/title') }}
+{{ encore_entry_link_tags('css/p') }}
+{{ encore_entry_link_tags('css/link') }}
+{{ encore_entry_link_tags('css/table') }}
+
+<link
+href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+{# S'il n'y a pas d'événements aujourd'hui #}
+{% if matchs|length is same as (0) %}
+	<div class="css-divHomeDisplayDisconnected">
+		<span>
+			<h1>{{'Aujourd\'hui sur ' ~ app.request.attributes.get('city')}}</h1>
+			</span>
+			<div class="css-divMeetingDisplayToday">
+				<span>
+					<h4>Aucun événements aujourd'hui</h4>
+				</span>
+			</div>
+		</div>
+	{# si l'utilisateur n'est pas connecté, on ne peut pas ajouter en favoris, ou s'il n'y a pas de favoris à afficher #}
+	{% elseif not app.user  or favoris|length is same as (0) %}
+	<div class="css-divHomeDisplayDisconnected">
+		<span>
+			<h1>{{'Aujourd\'hui sur ' ~ app.request.attributes.get('city')}}</h1>
+		</span>
+		<div class="css-divMeetingDisplayToday">
+			<span>
+				<h4>Tous les événements sportifs</h4>
+			</span>
+			<div class="css-divShowMeetingsToday">
+				{% for match in matchs %}
+				<match>
+					<div class="css-divhomeDisplayAll">
+						<h3 class='css-homeTitleh3'>{{ match.sport }},
+							{{ match.competition }}</h3>
+						<h4 class='css-homeTitleh4'>{{ match.getInfrastructure().name }}</h4>
+
+						<table class='css-homeTableMeeting'>
+							<tbody>
+								<tr>
+									<td class='css-homeTdMeeting'>
+										<a
+											href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamHome().sport }) }}">
+											<img style="margin-right:20px"
+												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}"
+												height="64" width="64"></a>
+										{{ match.getTeamHome().name }}
+										<a class="js-homefav {{match.getTeamHome().id}}"
+											href="{{path('team_favorite',{'id' : match.getTeamHome().id}) }}">
+											{% if app.user %}
+											{% if match.getTeamHome().isFavoritedbyUser(app.user) %}
+											<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="fas fa-star"
+												style="color:yellow;"></i>
+											{% else %}
+											<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="far fa-star"
+												style="color:yellow;"></i>
+											{% endif %}
+											{% endif %}
+										</a>
+									</td>
+									<td class='css-homeTdMeeting'>
+										<div class='css-homeDate'>{{ match.meeting|date("G:i") }}
+										</div>
+									</td>
+									<td class='css-homeTdMeeting'>
+										<a class="js-homefav {{match.getTeamOutside().id}}"
+											href="{{path('team_favorite',{'id' : match.getTeamOutside().id}) }}">
+											{% if app.user %}
+											{% if match.getTeamOutside().isFavoritedbyUser(app.user) %}
+											<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="fas fa-star"
+												style="color:yellow;"></i>
+											{% else %}
+											<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="far fa-star"
+												style="color:yellow;"></i>
+											{% endif %}
+											{% endif %}
+										</a>
+										{{ match.getTeamOutside().name }}
+										<a
+											href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamOutside().sport }) }}">
+											<img style="margin-left:20px"
+												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}"
+												height="64" width="64">
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>
+							<a class='css-homeLink' href=" {{ path('map',{ city : match.city } ) }}">Aller à la
+								carte</a>
+						</p>
+					</div>
+				</match>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{# si l'utilsateur est connecté et à des favoris à afficher#}
+	{% else %}
+	<div id="fav" class="css-divHomeDisplayConnected">
+		<span>
+			<h1>{{'Aujourd\'hui sur ' ~ app.request.attributes.get('city')}}</h1>
+			</span>
+			<div class="css-divMeetingDisplayToday">
+				<div class="css-divColumnEvent">
+					<h4>Tous les événements</h4>
+					<div
+						class="css-divShowMeetingsToday">
+						{# Affichage des événements du jour de la ville avec option d'ajout en favoris #}
+						{% for match in matchs %}
+							<match>
+								<div class="css-divhomeDisplayAll">
+									<h3 class='css-homeTitleh3'>{{ match.sport }},
+				{{ match.competition }}</h3>
+			<h4 class='css-homeTitleh4'>{{ match.getInfrastructure().name }}</h4>
+			<table class='css-homeTableMeeting'>
+				<tbody>
+					<tr>
+						<td class='css-homeTdMeeting'>
+							<a href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamHome().sport }) }}">
+								<img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}" height="64" width="64"></a>
+							{{ match.getTeamHome().name }}
+							<a class="js-homefav {{match.getTeamHome().id}}" href="{{path('team_favorite',{'id' : match.getTeamHome().id}) }}">
+								{% if match.getTeamHome().isFavoritedbyUser(app.user) %}
+									<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="fas fa-star" style="color:yellow;"></i>
+								{% else %}
+									<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="far fa-star" style="color:yellow;"></i>
+								{% endif %}
+							</a>
+						</td>
+						<td class='css-homeTdMeeting'>
+							<div class='css-homeDate'>{{ match.meeting|date("G:i") }}
+							</div>
+						</td>
+						<td class='css-homeTdMeeting'>
+							<a class="js-homefav {{match.getTeamOutside().id}}" href="{{path('team_favorite',{'id' : match.getTeamOutside().id}) }}">
+								{% if match.getTeamOutside().isFavoritedbyUser(app.user) %}
+									<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="fas fa-star" style="color:yellow;"></i>
+								{% else %}
+									<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="far fa-star" style="color:yellow;"></i>
+								{% endif %}
+							</a>
+							{{ match.getTeamOutside().name }}
+							<a href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamOutside().sport }) }}">
+								<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}" height="64" width="64">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<a class='css-homeLink' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+			</p>
+		</div>
+	</match>
+{% endfor %}</div></div><div class="css-divColumnEvent"><h4>Les favoris qui jouent</h4><div
+class="css-divShowMeetingsToday">
+{# Affichage d'un événement contenant l'équipe à domicile (donc ville) en favoris #}
+{% for fav in favoris %}
+	<fav>
+		<div class="css-divhomeDisplayAll">
+			<h3 class='css-homeTitleh3'>{{ fav.sport }},
+				{{ fav.competition }}</h3>
+			<h4 class='css-homeTitleh4'>{{ fav.getInfrastructure().name }}</h4>
+			<table class='css-homeTableMeeting'>
+				<tbody>
+					<tr>
+						<td class='css-homeTdMeeting'>
+							<a href="{{ path('team' , {team : fav.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : fav.getTeamHome().sport }) }}">
+								<img style="margin-right:20px" src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamHome().logo) }}" height="64" width="64"></a>
+							{{ fav.getTeamHome().name }}
+							<a class="js-homefav {{fav.getTeamHome().id}}" href="{{path('team_favorite',{'id' : fav.getTeamHome().id}) }}">
+								{% if fav.getTeamHome().isFavoritedbyUser(app.user) %}
+									<i id="{{'js-fav-id-'~fav.getTeamHome().id}}" class="fas fa-star" style="color:yellow;"></i>
+								{% else %}
+									<i id="{{'js-fav-id-'~fav.getTeamHome().id}}" class="far fa-star" style="color:yellow;"></i>
+								{% endif %}
+							</a>
+						</td>
+						<td class='css-homeTdMeeting'>
+							<div class='css-homeDate'>{{ fav.meeting|date("G:i") }}
+							</div>
+						</td>
+						<td class='css-homeTdMeeting'>
+							<a class="js-homefav {{fav.getTeamOutside().id}}" href="{{path('team_favorite',{'id' : fav.getTeamOutside().id}) }}">
+								{% if fav.getTeamOutside().isFavoritedbyUser(app.user) %}
+									<i id="{{'js-fav-id-'~fav.getTeamOutside().id}}" class="fas fa-star" style="color:yellow;"></i>
+								{% else %}
+									<i id="{{'js-fav-id-'~fav.getTeamOutside().id}}" class="far fa-star" style="color:yellow;"></i>
+								{% endif %}
+							</a>
+							{{ fav.getTeamOutside().name }}
+							<a href="{{ path('team' , {team : fav.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : fav.getTeamOutside().sport }) }}">
+								<img style="margin-left:20px" src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamOutside().logo) }}" height="64" width="64">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<a class='css-homeLink' href=" {{ path('map',{ city : fav.city } ) }}">Aller à la carte</a>
+			</p>
+		</div>
+	</fav>
+{% endfor %}</div></div></div></div>{% endif %}{% block javascript %}<script src="https://unpkg.com/axios/dist/axios.min.js"></script>{{ encore_entry_script_tags('js/favorite') }}{% endblock %}{% endblock %}

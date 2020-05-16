@@ -22,29 +22,40 @@ class Profil
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable =true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
-     * @ORM\Column(type="boolean", nullable =true)
+     * @ORM\Column(type="boolean", nullable = true, options={"default":0})
      */
     private $notificationmail;
 
     /**
-     * @ORM\Column(type="boolean", nullable =true)
+     * @ORM\Column(type="boolean", nullable = true, options={"default":0})
      */
     private $notificationsms;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -80,7 +91,7 @@ class Profil
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -92,7 +103,7 @@ class Profil
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
@@ -119,6 +130,30 @@ class Profil
     public function setNotificationsms(bool $notificationsms): self
     {
         $this->notificationsms = $notificationsms;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -29,12 +30,19 @@ class LoginAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator i
     private $csrfTokenManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    /**
+     * @var RequestStack request
+     */
+    private $rs;
+
+
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, RequestStack $rs)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->rs = $rs;
     }
 
     public function supports(Request $request)
@@ -67,7 +75,7 @@ class LoginAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator i
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
 
-        if (!$user or $user->getActivate() == 0 ) {
+        if (!$user or $user->getActivate() == 0) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Nom d\'utilisateur incorrect ou compte non activé.');
         }
@@ -97,6 +105,8 @@ class LoginAuthentificatorAuthenticator extends AbstractFormLoginAuthenticator i
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login');
+        $request = $this->rs->getCurrentRequest();
+        $city = $request->attributes->get('city');
+        return $this->urlGenerator->generate('app_login', ['city' => $city]);
     }
 }

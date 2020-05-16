@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profil;
+
 use App\Form\ProfilType;
 use App\Repository\UserRepository;
 use App\Repository\ProfilRepository;
@@ -10,6 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
 {
@@ -20,31 +23,119 @@ class ProfilController extends AbstractController
         $this->urepository = $urepository;
     }
 
-
-
     /**
-     * @Route("/profil/{username}", name="profil")
+     * @Route("/profil/city={city}/{username}", name="profil")
+     * 
+     * Correspond à la page de profil d'un utilisateur
      */
     public function index(Request $request, EntityManagerInterface $manager, $username)
     {
-
+        /* On récupère les données utiles comme l'utilisateur et le lien avec le prof */
         $user = $this->urepository->findOneBy(['username' => $username]);
         $profil = $this->prepository->findOneBy(['email' => $user->getEmail()]);
-
-        $form = $this->createForm(ProfilType::class,$profil);
-
-
+        $username = $user->getUsername();
+        $form = $this->createForm(ProfilType::class, $profil);
+        $manager = $this->getDoctrine()->getManager();
+        $imagetmp = $profil->getImage();
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $manager = $this->getDoctrine()->getManager();
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
+
+        /**
+         * On vérifie si les données saisies son correctes
+         * - Le type de l'image
+         * - Si toutes les données ont été saisies
+         * 
+         * On renomme l'image avec le pseudo de l'utilisateur et on la transfère dans le dossier profil pour une meilleur organisation
+         */
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadFile $image */
+
+            $image = $form->get('image')->getData();
+
+            if ($image) {
+                switch (implode($_FILES['profil']['type'])) {
+
+                    case "image/png":
+                        $name = $username . ".png";
+                        break;
+                    case "image/jpeg":
+                        $name = $username . ".jpeg";
+                        break;
+                    case "image/gif":
+                        $name = $username . ".gif";
+                        break;
+                }
+                try {
+                    $image->move(
+                        $this->getParameter('profil_directory'),
+                        $name
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+                $profil->setImage($name);
+            } else {
+                $name = $imagetmp;
+            }
+
+            $profil->setImage($name);
             $manager->persist($profil);
             $manager->flush();
             $user->setEmail($profil->getEmail());
         }
 
         return $this->render('profil/profil.html.twig', [
-            'formProfil' => $form->createView()
+            'formProfil' => $form->createView(),
+            'srcImage' => '/profil/' . $profil->getImage(),
+            'sports' => $sports
+        ]);
+    }
+
+    /**
+     * @Route("/pwdchange/{username}", name="pwdchange")
+     * 
+     * Correspond à la page du changement de mot de passe
+     */
+
+    public function modificationpwd(Request $request, EntityManagerInterface $manager,  UserPasswordEncoderInterface $encoder, $username)
+    {
+        $user = $this->urepository->findOneBy(['username' => $username]);
+
+        $manager = $this->getDoctrine()->getManager();
+        $form = $this->createFormBuilder()
+            ->add('pwd', PasswordType::class)
+            ->add('confirmPwd', PasswordType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pwd = $form['pwd']->getData();
+            $confirmPWD =  $form['confirmPwd']->getData();
+            if (strcmp($pwd, $confirmPWD) == 0) {
+
+                $manager = $this->getDoctrine()->getManager();
+                $hash = $encoder->encodePassword($user, $pwd);
+                $user->setPassword($hash);
+                $manager->persist($user);
+                $manager->flush();
+
+                return $this->redirectToRoute('home');
+            } else {
+                return $this->render('security/pwdmodif.html.twig', [
+                    'formPWD' => $form->createView(),
+                    'error' => "Les mots de passe ne correspondent pas"
+                ]);
+            }
+        }
+
+        return $this->render('security/pwdmodif.html.twig', [
+            'formPWD' => $form->createView(),
+            'error' => NULL
         ]);
     }
 }

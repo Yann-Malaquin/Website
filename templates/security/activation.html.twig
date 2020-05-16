@@ -1,13 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
-{% block title %}Activation{% endblock %}
+{% block title %}Activation
+{% endblock %}
 
 {% block body %}
 
-{% if activation == 0 %}
-    <p>Le compte n'est pas activé</p>
-{% else %}
-    <p>Compte activé <a href = "{{ path('home') }}">Retour</a> </p>
+	{% if activation == 0 %}
+		<p>Le compte n'est pas activé</p>
+	{% else %}
+		<p>Compte activé
+			<a href="{{ path('home') }}">Retour</a>
+		</p>
 
-{% endif %}
+	{% endif %}
 {% endblock %}

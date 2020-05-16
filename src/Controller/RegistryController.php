@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Profil;
+use App\Entity\Sportmeeting;
 use App\Form\RegistrationType;
 use App\Notification\MailNotification;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,19 +18,27 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistryController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="registry")
+     * @Route("/inscription/city={city}", name="registry")
+     * 
+     * Correspond à la page d'inscription
      */
-    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder){
-        
+    public function registration(Request $request, EntityManagerInterface $manager, MailerInterface $mailer, MailNotification $mailnotif, UserPasswordEncoderInterface $encoder, $city)
+    {
+
         $user = new User();
         $profil = new Profil();
-        
-        $form = $this->createForm(RegistrationType::class,$user);
+
+        $form = $this->createForm(RegistrationType::class, $user);
+
+        $date = date("Y-m-d");
+        $sports = $this->getDoctrine()
+            ->getRepository(Sportmeeting::class)
+            ->findAllSport($city);
 
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $this->getDoctrine()->getManager();
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
@@ -38,6 +47,7 @@ class RegistryController extends AbstractController
             $manager->flush();
 
             $profil->setEmail($user->getEmail());
+            $profil->setUser($user);
             $manager->persist($profil);
             $manager->flush();
 
@@ -45,7 +55,8 @@ class RegistryController extends AbstractController
         }
 
         return $this->render('registry/registry.html.twig', [
-            'formRegistration' => $form->createView()
+            'formRegistration' => $form->createView(),
+            'sports' => $sports
         ]);
     }
 }

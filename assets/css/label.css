@@ -1,0 +1,44 @@
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+
+.css-profilLabel{
+    margin:0 10%;
+    display: inline-block;
+    width:100px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}
+
+.css-profilNotification{
+    width:400px;
+    margin-left:10%;
+    margin-bottom: 5%;
+    margin-right: 1%;
+    display: inline-block;
+    font-size: 18px;
+    font-family: "Roman";
+    color:black;
+}
+
+.css-registryLabel{
+    margin-top:20px;
+    margin-right : 30px;
+    display: inline-block;
+    width:250px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}
+
+.css-loginLabel{
+    margin-top:60px;
+    margin-right : 30px;
+    display: inline-block;
+    width:180px;
+    font-size: 20px;
+    font-family: "Roman";
+    color:black;
+}

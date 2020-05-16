@@ -24,12 +24,24 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('js/map', './assets/js/map.js')
+    .addEntry('js/home', './assets/js/home.js')
+    .addEntry('js/favorite', './assets/js/favorite.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
 
+    .addStyleEntry('css/button', './assets/css/button.css')
+    .addStyleEntry('css/div', './assets/css/div.css')
+    .addStyleEntry('css/figure', './assets/css/figure.css')
+    .addStyleEntry('css/img', './assets/css/img.css')
     .addStyleEntry('css/input', './assets/css/input.css')
-    .addStyleEntry('css/test', './assets/css/test.css')
+    .addStyleEntry('css/label', './assets/css/label.css')
+    .addStyleEntry('css/link', './assets/css/link.css')
+    .addStyleEntry('css/load', './assets/css/load.css')
+    .addStyleEntry('css/p', './assets/css/p.css')
+    .addStyleEntry('css/table', './assets/css/table.css')
+    .addStyleEntry('css/title', './assets/css/title.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -73,6 +85,6 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
-;
+    ;
 
 module.exports = Encore.getWebpackConfig();

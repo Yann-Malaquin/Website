@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+{# Affiche les informations relatives à l'équipe '#}
+{% block title %}
+	{{app.request.attributes.get('team')}}
+{% endblock %}
+
+{% block body %}
+	{{ encore_entry_link_tags('css/img') }}
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/figure') }}
+	{{ encore_entry_link_tags('css/table') }}
+	{{ encore_entry_link_tags('css/p') }}
+
+	{% set i = 0 %}
+	<div class='css-team'>
+		<div class="css-teamData">
+			<div class="css-teamImage">
+				<figure>
+					<img src=" {{ asset('/image/logo/'~ app.request.attributes.get('categorie')~'/'~ team.logo)}}" alt='logo' height="256px" width="256px">
+					<figcaption class='css-teamFigcaptionTrainer'>{{team.name}}</figcaption>
+					<img src="{{asset('/image/trainer/'~ team.trainer ~'.jpeg')}}" alt='trainer' height="256px" width="240px">
+					<figcaption class='css-teamFigcaptionTrainer'>{{team.trainer}}, entraîneur</figcaption>
+				</figure>
+			</div>
+			<div class="css-teamDataDisplay">
+				<div class="css-teamDataDisplay">
+					<p class="css-pTeam">Nom du club :
+						{{ team.name }}
+					</p>
+					<p class="css-pTeam">Surnom :
+						{{ team.abbreviation }}
+					</p>
+				</div>
+				<div class="css-teamStadium">
+					<p class="css-pTeam">Nom du stade :
+						{{ team.getInfrastructure().name}}
+					</p>
+					<p class="css-pTeam">Président :
+						{{ team.getPresidentName() }}
+					</p>
+				</div>
+			</div>
+		</div>
+
+
+		<table class='css-teamTable'>
+			<caption class="css-teamCaption">
+				Effectif
+				{{ team.name }}
+			</caption>
+			<thead>
+				<tr>
+					<th class='css-teamTh'>Numéro</th>
+					<th class='css-teamTh'>Nom</th>
+					<th class='css-teamTh'>Prénom</th>
+					<th class='css-teamTh'>Age</th>
+					<th class='css-teamTh'>Nationalité</th>
+					<th class='css-teamTh'>Poste</th>
+				</tr>
+			</thead>
+			{% for goalkeeper in goalkeepers %}
+				<tr>
+					{% if i == 0 %}
+						<td class="css-teamTd">{{ goalkeeper.number }}</td>
+						<td class="css-teamTd">{{ goalkeeper.name }}</td>
+						<td class="css-teamTd">{{ goalkeeper.firstname }}</td>
+						<td class="css-teamTd">{{ goalkeeper.age }}</td>
+						<td class="css-teamTd">
+							<a title="{{ goalkeeper.nationality }}"><img alt="{{ goalkeeper.nationality }}" src="{{ asset('/image/flags/' ~goalkeeper.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td class="css-teamTd">{{ goalkeeper.position }}</td>
+						{% set i = 1 %}
+					{% else %}
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ goalkeeper.number }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ goalkeeper.name }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ goalkeeper.firstname }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ goalkeeper.age }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">
+							<a title="{{ goalkeeper.nationality }}"><img alt="{{ goalkeeper.nationality }}" src="{{ asset('/image/flags/' ~goalkeeper.nationality ~'.svg.png') }}"/></a>
+						</td>
+
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ goalkeeper.position }}</td>
+						{% set i = 0 %}
+					{% endif %}
+				</tr>
+			{% endfor %}
+
+			{% for defender in defenders %}
+				<tr>
+					{% if i == 0 %}
+						<td class="css-teamTd">{{ defender.number }}</td>
+						<td class="css-teamTd">{{ defender.name }}</td>
+						<td class="css-teamTd">{{ defender.firstname }}</td>
+						<td class="css-teamTd">{{ defender.age }}</td>
+						<td class="css-teamTd">
+							<a title="{{ defender.nationality }}"><img alt="{{ defender.nationality }}" src="{{ asset('/image/flags/' ~defender.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td class="css-teamTd">{{ defender.position }}</td>
+						{% set i = 1 %}
+
+					{% else %}
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ defender.number }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ defender.name }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ defender.firstname }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ defender.age }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">
+							<a title="{{ defender.nationality }}"><img alt="{{ defender.nationality }}" src="{{ asset('/image/flags/' ~defender.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ defender.position }}</td>
+						{% set i = 0 %}
+					{% endif %}
+				</tr>
+			{% endfor %}
+
+			{% for middle in middles %}
+				<tr>
+					{% if i == 0 %}
+						<td class="css-teamTd">{{ middle.number }}</td>
+						<td class="css-teamTd">{{ middle.name }}</td>
+						<td class="css-teamTd">{{ middle.firstname }}</td>
+						<td class="css-teamTd">{{ middle.age }}</td>
+						<td class="css-teamTd">
+							<a title="{{ middle.nationality }}"><img alt="{{ middle.nationality }}" src="{{ asset('/image/flags/' ~middle.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td class="css-teamTd">{{ middle.position }}</td>
+
+						{% set i = 1 %}
+
+					{% else %}
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ middle.number }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ middle.name }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ middle.firstname }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ middle.age }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">
+							<a title="{{ middle.nationality }}"><img alt="{{ middle.nationality }}" src="{{ asset('/image/flags/' ~middle.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ middle.position }}</td>
+						{% set i = 0 %}
+					{% endif %}
+
+				</tr>
+			{% endfor %}
+
+			{% for attacker in attakers %}
+				<tr>
+					{% if i == 0 %}
+						<td class="css-teamTd">{{ attacker.number }}</td>
+						<td class="css-teamTd">{{ attacker.name }}</td>
+						<td class="css-teamTd">{{ attacker.firstname }}</td>
+						<td class="css-teamTd">{{ attacker.age }}</td>
+						<td class="css-teamTd">
+							<a title="{{ attacker.nationality }}"><img alt="{{ attacker.nationality }}" src="{{ asset('/image/flags/' ~attacker.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td class="css-teamTd">{{ attacker.position }}</td>
+						{% set i = 1 %}
+
+					{% else %}
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ attacker.number }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ attacker.name }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ attacker.firstname }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ attacker.age }}</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">
+							<a title="{{ attacker.nationality }}"><img alt="{{ attacker.nationality }}" src="{{ asset('/image/flags/' ~attacker.nationality ~'.svg.png') }}"/></a>
+						</td>
+						<td style="background-color:lightgrey;" class="css-teamTd">{{ attacker.position }}</td>
+						{% set i = 0 %}
+					{% endif %}
+
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

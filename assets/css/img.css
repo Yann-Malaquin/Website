@@ -1,0 +1,42 @@
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+
+.css-profilPicture{
+    display: block;
+    border-radius:50%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    width: 128px;
+    height: 128px;
+    border-style: solid;
+}
+
+.css-teamFigcaptionTrainer{
+    text-align: center;
+    padding-top: 3px;
+    width:256px;
+    margin-bottom: 100px;
+    font-family: "Roman";
+}
+
+.css-fav-image{
+    border-radius:50%;
+    border-style: solid;
+    width: 256px;
+    height: 256px;
+}
+
+.css-fav-imageFig{
+    padding-top: 0.5em;
+    font-size: 2.5em;
+}
+
+.css-fav-figure{
+    width : 256px;
+    margin : 4em;
+    text-align: center;
+}

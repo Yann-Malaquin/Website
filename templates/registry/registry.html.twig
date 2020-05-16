@@ -1,32 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/label') }}
+	{{ encore_entry_link_tags('css/input') }}
+	{{ encore_entry_link_tags('css/button') }}
 
-{{ form_start(formRegistration)}}
-<div class = "form-group">
-{{ form_row(formRegistration.email, {'label' : 'Email', 'attr' : {'placeholder' : 'michel.dupont@example.com'}}) }}
-</div>
+	<div class='css-registryTitle'>
+		<h1>Inscription</h1>
+	</div>
+	<div class='css-registry'>
+		{{ form_start(formRegistration)}}
 
-<div class = "form-group">
-{{ form_row(formRegistration.username, {'label' : 'Nom d\'utilisateur', 'attr' : {'placeholder' : 'Mimi'}}) }}
-</div>
+		<div class='css-registryForm'>
+			<div class="form-group">
+				{{ form_label(formRegistration.email, 'Email', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.email, {'attr' : {'placeholder' : 'michel.dupont@example.com', 'class' : 'css-registryInput'}}) }}
 
-<div class = "form-group">
-{{ form_row(formRegistration.password, {'label' : 'Mot de passe', 'attr' : {'placeholder' : 'Azerty123'}}) }}
-</div>
+			</div>
 
-<div class = "form-group">
-{{ form_row(formRegistration.confirm_password, {'label' : 'Confirmer mot de passse', 'attr' : {'placeholder' : 'Azerty123'}}) }}
-</div>
+			<div class="form-group">
+				{{ form_label(formRegistration.username, 'Nom d utilisateur', {'label_attr': {'class': 'css-registryLabel'}}) }}
 
-<div>
-    <button type="submit" class ="btn btn-success">S'inscrire</button>
-</div>
+				{{ form_widget(formRegistration.username, {'attr' : {'placeholder' : 'Mimi', 'class' : 'css-registryInput'}}) }}
 
-{{ form_end(formRegistration)}}
+			</div>
 
+			<div class="form-group">
+				{{ form_label(formRegistration.password, 'Mot de passe', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.password, { 'attr' : {'placeholder' : 'Azerty123', 'class' : 'css-registryInput'}}) }}
 
 
+			</div>
+
+			<div class="form-group">
+				{{ form_label(formRegistration.confirm_password, 'Confirmer mot de passe', {'label_attr': {'class': 'css-registryLabel'}}) }}
+				{{ form_widget(formRegistration.confirm_password, {'attr' : {'placeholder' : 'Azerty123', 'class' : 'css-registryInput'}}) }}
+
+			</div>
+
+			<div>
+				<button type="submit" class="btn btn-primary">S'inscrire</button>
+			</div>
+
+			{{ form_end(formRegistration)}}
+		</div>
+	</div>
 {% endblock %}

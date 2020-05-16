@@ -1,0 +1,27 @@
+@font-face{
+    font-family:"Roman";
+    src : url("/public/font/Roman_SD.ttf");
+}
+
+.css-profilModification{
+    font-family: "Roman";
+    font-size: 20px;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+.btn{
+    margin-bottom: 20px;
+}
+
+.css-passwordModification{
+    font-family: "Roman";
+    margin-bottom: 5%;
+}
+
+.css-button-h1 , .css-button-h4 {
+	border: none;
+}
+.css-button-h1:focus, .css-button-h4:focus {
+    outline: 0 !important;
+}

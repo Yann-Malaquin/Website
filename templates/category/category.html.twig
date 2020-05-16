@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{# Affichage de tous les événements d'une catégorie précise'#}
+
+{% block title %}Catégorie |
+	{{title}}
+{% endblock %}
+
+{% block body %}
+	<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+	{{ encore_entry_link_tags('css/div') }}
+	{{ encore_entry_link_tags('css/title') }}
+	{{ encore_entry_link_tags('css/p') }}
+	{{ encore_entry_link_tags('css/link') }}
+	{{ encore_entry_link_tags('css/table') }}
+
+	<div class="css-category">
+		<div
+			class="css-divCatDisplay">
+			{# On affiche tous les événements. Si l'on est connecté on peut ajouter en favoris'#}
+			{% for match in matchs %}
+				<match>
+					<div class="css-divCategoryDisplay">
+						<h3 class='css-categoryTitleh3'>{{ match.sport }},
+							{{ match.competition }}</h3>
+						<h4 class='css-categoryTitleh4'>{{ match.getInfrastructure().name }}</h4>
+						<table class='css-categoryTableMeeting'>
+							<tbody>
+								<tr>
+									<td class='css-categoryTdMeeting'>
+										<a href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : app.request.attributes.get('categorie') }) }}">
+											<img style="margin-right:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}" height="64" width="64"></a>
+										{{ match.getTeamHome().name }}
+										<a class="js-fav {{match.getTeamHome().id}}" href="{{path('team_favorite',{'id' : match.getTeamHome().id}) }}">
+											{% if app.user %}
+												{% if match.getTeamHome().isFavoritedbyUser(app.user) %}
+													<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="fas fa-star" style="color:yellow;"></i>
+												{% else %}
+													<i id="{{'js-fav-id-'~match.getTeamHome().id}}" class="far fa-star" style="color:yellow;"></i>
+												{% endif %}
+											{% endif %}
+										</a>
+									</td>
+
+									<td class='css-categoryTdMeeting'>
+										{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
+											<div class='css-categoryDate'>{{ match.meeting|date("G:i") }}
+											</div>
+										{% else %}
+											<div class='css-categoryDate'>
+												{{ match.meeting|date("G:i") }}<br>
+												{{ match.meeting|date("d-m-Y")}}
+											</div>
+										{% endif %}
+									</td>
+									<td class='css-categoryTdMeeting'>
+										<a class="js-fav" href="{{path('team_favorite',{'id' : match.getTeamOutside().id}) }}">
+											{% if app.user %}
+												{% if match.getTeamOutside().isFavoritedbyUser(app.user) %}
+													<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="fas fa-star" style="color:yellow;"></i>
+												{% else %}
+													<i id="{{'js-fav-id-'~match.getTeamOutside().id}}" class="far fa-star" style="color:yellow;"></i>
+												{% endif %}
+											{% endif %}
+										</a>
+										{{ match.getTeamOutside().name }}
+										<a href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : app.request.attributes.get('categorie') }) }}">
+											<img style="margin-left:20px" src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}" height="64" width="64">
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>
+							{% if "now"|date("Y-m-d") is same as (match.meeting|date("Y-m-d")) %}
+								<a class='css-categoryLink' href=" {{ path('map',{ city : match.city } ) }}">Aller à la carte</a>
+							{% endif %}
+						</p>
+					</div>
+				</match>
+			{% endfor %}
+		</div>
+	</div>
+	{% block javascripts %}
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		{{ encore_entry_script_tags('js/favorite') }}
+	{% endblock %}
+{% endblock %}
