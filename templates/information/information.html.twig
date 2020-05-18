@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations{% endblock %}
+
+{% block body %}
+{{ encore_entry_link_tags('css/div') }}
+{{ encore_entry_link_tags('css/list') }}
+
+<div class="css-information">
+    <h4 class="css-informationTitle">Mises à jour à venir</h4>
+    <div class="css-informationMAJ">
+        <ul class="css-informationList">
+            <li class="css-informationLi">Ajout de l'itinéraire</li>
+            <li class="css-informationLi">Ajout des sports individuels</li>
+            <li class="css-informationLi">Ajout des salles de musculation</li>
+            <li class="css-informationLi">Suppression automatique des événements terminés sur la page d'accueil</li>
+            <li class="css-informationLi">Ajout d'un fil d'actualité en rapport avec les favoris</li>
+            <li class="css-informationLi">Mise en subrillance des favoris sur la carte</li>
+            <li class="css-informationLi">Envoie d'email et de sms pour prévenir si une équipe en favoris joue</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

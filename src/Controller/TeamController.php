@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Favorites;
 use App\Entity\Team;
 use App\Entity\Player;
-use App\Repository\FavoritesRepository;
+use App\Entity\Favorites;
+use App\Entity\Sportmeeting;
 use App\Repository\TeamRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\FavoritesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 class TeamController extends AbstractController
 {
@@ -21,7 +22,7 @@ class TeamController extends AbstractController
      * Correspond à la page concernant les informations d'une équipe
      * On retourne les informations par poste
      */
-    public function index($categorie, $team)
+    public function index($categorie, $team, $city)
     {
         $date = date("Y-m-d");
         $sports = $this->getDoctrine()
@@ -32,29 +33,15 @@ class TeamController extends AbstractController
             ->getRepository(Team::class)
             ->findTeambyName($team, $categorie);
 
-        $goalkeepers = $this->getDoctrine()
+        $players = $this->getDoctrine()
             ->getRepository(Player::class)
-            ->findbyPosition($team, "Gardien");
+            ->findPlayers($team);
 
-        $defenders = $this->getDoctrine()
-            ->getRepository(Player::class)
-            ->findbyPosition($team, "Défenseur");
-
-        $middles = $this->getDoctrine()
-            ->getRepository(Player::class)
-            ->findbyPosition($team, "Milieu");
-
-        $attakers = $this->getDoctrine()
-            ->getRepository(Player::class)
-            ->findbyPosition($team, "Attaquant");
 
         return $this->render('team/team.html.twig', [
             'controller_name' => 'TeamController',
             'team' => $_team,
-            'goalkeepers' => $goalkeepers,
-            'defenders' => $defenders,
-            'middles' => $middles,
-            'attakers' => $attakers,
+            'players' => $players,
             'sports' => $sports
         ]);
     }

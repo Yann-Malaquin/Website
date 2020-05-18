@@ -38,6 +38,7 @@ Encore
     .addStyleEntry('css/input', './assets/css/input.css')
     .addStyleEntry('css/label', './assets/css/label.css')
     .addStyleEntry('css/link', './assets/css/link.css')
+    .addStyleEntry('css/list', './assets/css/list.css')
     .addStyleEntry('css/load', './assets/css/load.css')
     .addStyleEntry('css/p', './assets/css/p.css')
     .addStyleEntry('css/table', './assets/css/table.css')
