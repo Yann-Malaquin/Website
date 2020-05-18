@@ -53,14 +53,14 @@ class PlayerRepository extends ServiceEntityRepository
      * @param  $team
      * @param  $position
      */
-    public function findbyPosition($team, $position)
+    public function findPlayers($team)
     {
         $qb =  $this->createQueryBuilder('p')
             ->select('p')
-            ->andWhere('t.abbreviation = :team', 't.id = p.team', 'p.position = :position')
+            ->andWhere('t.abbreviation = :team', 't.id = p.team')
             ->join('p.team', 't')
-            ->setParameter('team', $team)
-            ->setParameter('position', $position);
+            ->orderBy('p.orderDisplay', 'ASC')
+            ->setParameter('team', $team);
 
         return $qb->getQuery()->getResult();
     }
