@@ -23,7 +23,6 @@ Lorsque l'on se retrouve sur l'IDE Visual studio Code, dans CMD :
 - composer install
 - yarn install
 - yarn add @symfony/webpack-encore --dev
-- yarn encore dev --watch
 - yarn encore production
 
 Sinon se placer à l'aide de CMD dans le dossier du site et utiliser les lignes de commande
