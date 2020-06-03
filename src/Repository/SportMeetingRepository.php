@@ -2,15 +2,14 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\Query;
 use App\Entity\Sportmeeting;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Sportmeeting|null find($id, $lockMode = null, $lockVersion = null)
  * @method Sportmeeting|null findOneBy(array $criteria, array $orderBy = null)
- * @method Sportmeeting[]    findAll()how to retu
+ * @method Sportmeeting[]    findAll()
  * @method Sportmeeting[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class SportmeetingRepository extends ServiceEntityRepository
@@ -48,7 +47,6 @@ class SportmeetingRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /**
      * Permet de trouver toutes les infrastructure d'une ville et du jours(utile pour la carte)
      *

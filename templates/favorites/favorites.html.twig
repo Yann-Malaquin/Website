@@ -4,101 +4,109 @@
 {% endblock %}
 
 {% block body %}
-	{{ encore_entry_link_tags('css/div') }}
-	{{ encore_entry_link_tags('css/img') }}
-	{{ encore_entry_link_tags('css/title') }}
-	{{ encore_entry_link_tags('css/p') }}
-	{{ encore_entry_link_tags('css/link') }}
-	{{ encore_entry_link_tags('css/table') }}
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.css" rel="stylesheet" media="screen">
-	<style>
-		.css-navbar {
-			border-color: darkslategrey;
-			width: 1000px;
-		}
+{{ encore_entry_link_tags('css/div') }}
+{{ encore_entry_link_tags('css/img') }}
+{{ encore_entry_link_tags('css/title') }}
+{{ encore_entry_link_tags('css/p') }}
+{{ encore_entry_link_tags('css/link') }}
+{{ encore_entry_link_tags('css/table') }}
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.css" rel="stylesheet"
+	media="screen">
+<style>
+	.css-navbar {
+		border-color: darkslategrey;
+		width: 1000px;
+	}
 
-		.css-navbar-1 {
-			border-color: darkslategrey;
-			width: 1000px;
-			border-top: none;
-			border-bottom: none;
-		}
-	</style>
-
-	<div class="css-favoritesDisplay">
-		<div class="css-showImage">
-			<figure class="css-fav-figure">
-				<img src=" {{ asset('/profil/'~user.image)}}" alt='imageProfil' class="css-fav-image">
-				<figcaption class='css-fav-imageFig'>{{user.username}}</figcaption>
-			</figure>
-		</div>
-
-		<div class="css-showFavorites">
-			{% for sport in sportTeam %}
-				<nav class="css-navbar navbar navbar-light bg-light">
-					<button id="js-caret" class="css-button-h1 js-caret navbar-toggler" type="button" data-toggle="collapse" data-target="{{'#'~ sport.sport}}" aria-controls="{{sport.sport}}" aria-expanded="false" aria-label="Toggle navigation">
-						<h1>{{sport.sport}}
-							<span class="" id="test"></span>
-							<span class="fa fa-caret-right"></span>
-						</h1>
-					</button>
-				</nav>
-				{% for team in teams %}
-					{% set cpt = cpt + 1 %}
-					<div class="cpt">{{cpt}}</div>
-					<div class="collapse" id="{{sport.sport}}">
-						<nav class="css-navbar navbar navbar-light bg-light">
-							<button id="js-caret" class="css-button-h4 js-caret navbar-toggler" type="button" data-toggle="collapse" data-target="{{'#'~ sport.sport ~ '_'~ team.getTeam().abbreviation}}" aria-controls="{{sport.sport ~ '_'~ team.getTeam().abbreviation }}" aria-expanded="false" aria-label="Toggle navigation">
-								<h4>{{team.getTeam().name}}
-									<span class="fa fa-caret-right"></span>
-								</h4>
-							</button>
-						</nav>
-					</div>
-					{% for meeting in meetings %}
-						<div class="css-favMeeting collapse" id="{{sport.sport ~ '_'~ team.getTeam().abbreviation }}">
-							<nav class="css-navbar-1 navbar navbar-light bg-light">
-								{% if meeting.sport is same as(sport.sport) and (meeting.getTeamHome().getName() is same as(team.getTeam().name) or meeting.getTeamOutside().getName() is same as(team.getTeam().name)) %}
-									<div class="css-divFavorisDisplayAll">
-										<h3 class='css-favoritesTitleh3'>{{ meeting.sport }},
-											{{ meeting.competition }}</h3>
-										<h4 class='css-favoritesTitleh4'>{{ meeting.getInfrastructure().name }}</h4>
-										<table class='css-favoritesTableMeeting'>
-											<tbody>
-												<tr>
-													<td class='css-favoritesTdMeeting'>
-														<a href="{{ path('team' , {team : meeting.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
-															<img style="margin-right:20px" src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamHome().logo) }}" height="64" width="64"></a>
-														{{ meeting.getTeamHome().name }}
-													</td>
-													<td class='css-favoritesTdMeeting'>
-														{% if "now"|date("Y-m-d") is same as (meeting.meeting|date("Y-m-d")) %}
-															<div class='css-favoritesDate'>{{ meeting.meeting|date("G:i") }}
-															</div>
-														{% else %}
-															<div class='css-favoritesDate'>
-																{{ meeting.meeting|date("G:i") }}<br>
-																{{ meeting.meeting|date("d-m-Y")}}
-															</div>
-														{% endif %}
-													</td>
-													<td class='css-favoritesTdMeeting'>
-														{{ meeting.getTeamOutside().name }}
-														<a href="{{ path('team' , {team : meeting.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
-															<img style="margin-left:20px" src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamOutside().logo) }}" height="64" width="64">
-														</a>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								{% endif %}
-							</nav>
-						</div>
-					{% endfor %}
-				{% endfor %}
-			{% endfor %}
-		</div>
+	.css-navbar-1 {
+		border-color: darkslategrey;
+		width: 1000px;
+		border-top: none;
+		border-bottom: none;
+	}
+</style>
+<div class="css-favoritesDisplay">
+	<div class="css-showImage">
+		<figure class="css-fav-figure">
+			<img src=" {{ asset('/profil/'~user.image)}}" alt='imageProfil' class="css-fav-image">
+			<figcaption class='css-fav-imageFig'>{{user.username}}</figcaption>
+		</figure>
 	</div>
-	{{encore_entry_script_tags('js/favorite')}}
-{% endblock %}{% endblock %}
+
+	<div class="css-showFavorites">
+		{% for sport in sportTeam %}
+		<nav class="css-navbar navbar navbar-light bg-light">
+			<button id="js-caret" class="css-button-h1 js-caret navbar-toggler" type="button" data-toggle="collapse"
+				data-target="{{'#'~ sport.sport}}" aria-controls="{{sport.sport}}" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<h1>{{sport.sport}}
+					<span class="fa fa-caret-right"></span>
+				</h1>
+			</button>
+		</nav>
+		{% for team in teams %}
+		<div class="collapse" id="{{sport.sport}}">
+			<nav class="css-navbar navbar navbar-light bg-light">
+				<button id="js-caret" class="css-button-h4 js-caret navbar-toggler" type="button" data-toggle="collapse"
+					data-target="{{'#'~ sport.sport ~ '_'~ team.getTeam().abbreviation}}"
+					aria-controls="{{sport.sport ~ '_'~ team.getTeam().abbreviation }}" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<h4>{{team.getTeam().name}}
+						<span class="fa fa-caret-right"></span>
+					</h4>
+				</button>
+			</nav>
+		</div>
+		{% for meeting in meetings %}
+		<div class="css-favMeeting collapse" id="{{sport.sport ~ '_'~ team.getTeam().abbreviation }}">
+			<nav class="css-navbar-1 navbar navbar-light bg-light">
+				{% if meeting.sport is same as(sport.sport) and (meeting.getTeamHome().getName() is same as(team.getTeam().name) or meeting.getTeamOutside().getName() is same as(team.getTeam().name)) %}
+				<div class="css-divFavorisDisplayAll">
+					<h3 class='css-favoritesTitleh3'>{{ meeting.sport }},
+						{{ meeting.competition }}</h3>
+					<h4 class='css-favoritesTitleh4'>{{ meeting.getInfrastructure().name }}</h4>
+					<table class='css-favoritesTableMeeting'>
+						<tbody>
+							<tr>
+								<td class='css-favoritesTdMeeting'>
+									<a
+										href="{{ path('team' , {team : meeting.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
+										<img style="margin-right:20px"
+											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamHome().logo) }}"
+											height="64" width="64"></a>
+									{{ meeting.getTeamHome().name }}
+								</td>
+								<td class='css-favoritesTdMeeting'>
+									{% if "now"|date("Y-m-d") is same as (meeting.meeting|date("Y-m-d")) %}
+									<div class='css-favoritesDate'>{{ meeting.meeting|date("G:i") }}
+									</div>
+									{% else %}
+									<div class='css-favoritesDate'>
+										{{ meeting.meeting|date("G:i") }}<br>
+										{{ meeting.meeting|date("d-m-Y")}}
+									</div>
+									{% endif %}
+								</td>
+								<td class='css-favoritesTdMeeting'>
+									{{ meeting.getTeamOutside().name }}
+									<a
+										href="{{ path('team' , {team : meeting.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
+										<img style="margin-left:20px"
+											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamOutside().logo) }}"
+											height="64" width="64">
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				{% endif %}
+			</nav>
+		</div>
+		{% endfor %}
+		{% endfor %}
+		{% endfor %}
+	</div>
+</div>
+{{encore_entry_script_tags('js/favorite')}}
+{% endblock %}

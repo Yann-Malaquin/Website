@@ -5,13 +5,14 @@ namespace App\Controller;
 use App\Entity\Profil;
 
 use App\Form\ProfilType;
+use App\Entity\Sportmeeting;
 use App\Repository\UserRepository;
 use App\Repository\ProfilRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfilController extends AbstractController
@@ -28,7 +29,7 @@ class ProfilController extends AbstractController
      * 
      * Correspond à la page de profil d'un utilisateur
      */
-    public function index(Request $request, EntityManagerInterface $manager, $username)
+    public function index(Request $request, EntityManagerInterface $manager, $username, $city)
     {
         /* On récupère les données utiles comme l'utilisateur et le lien avec le prof */
         $user = $this->urepository->findOneBy(['username' => $username]);
