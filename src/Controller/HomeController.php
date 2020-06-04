@@ -93,11 +93,12 @@ class HomeController extends AbstractController
                 $sportmeetings = $this->getDoctrine()
                     ->getRepository(Sportmeeting::class)
                     ->findMeetingsofDaybyTeam($id, $city, $date);
-                dump($sportmeetings);
             }
         } else {
             $sportmeetings = null;
         }
+
+
         return $this->render('home/homeDisplay.html.twig', [
             'controller_name' => 'HomeController',
             'sports' => $sports,

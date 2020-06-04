@@ -81,7 +81,6 @@
 							aria-haspopup="true" aria-expanded="false">Catégories</a>
 						<div class="dropdown-menu">
 							{% for sport in sports %}
-							{{ dump(sports)}}
 							{% set sp = sport.sport %}
 							<a class="dropdown-item"
 								href="{{ path('category', { categorie : sp, city : app.request.attributes.get('city') }) }}">{{sport.sport}}</a>

@@ -27,21 +27,24 @@ class FavoritesController extends AbstractController
             ->getRepository(Favorites::class)
             ->findFavoritesbyUser($username);
 
-        $date = date("Y-m-d");
         $sports = $this->getDoctrine()
             ->getRepository(Sportmeeting::class)
             ->findAllSport($city);
+
+
+        $sportsTeam = array();
         if ($fav) {
             foreach ($fav as $team_id) {
                 $id = $team_id->getTeam()->getId();
 
                 $sportmeetings = $this->getDoctrine()
                     ->getRepository(Sportmeeting::class)
-                    ->findMeetingsbyTeam($id);
+                    ->findAll();
 
-                $sportsTeam = $this->getDoctrine()
+                $tmp = $this->getDoctrine()
                     ->getRepository(Sportmeeting::class)
                     ->findSportbyTeam($id);
+                $sportsTeam = array_merge($sportsTeam, $tmp);
             }
         } else {
             $sportmeetings = null;
@@ -53,7 +56,7 @@ class FavoritesController extends AbstractController
             'user' => $user,
             'teams' => $fav,
             'meetings' => $sportmeetings,
-            'sportTeam' => $sportsTeam,
+            'sportTeam' => array_unique($sportsTeam, SORT_REGULAR),
             'sports' => $sports
         ]);
     }
