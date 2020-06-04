@@ -164,6 +164,7 @@ class SportmeetingRepository extends ServiceEntityRepository
             ->andWhere('i.city = :city', 'i.id = s.infrastructure', 'h.id = :team_id', 's.meeting LIKE :date')
             ->orderBy('s.meeting', 'ASC')
             ->join('s.team_home', 'h')
+            ->join('s.team_outside', 'o')
             ->join('s.infrastructure', 'i')
             ->setParameter('team_id', $team_id)
             ->setParameter('city', $city)
