@@ -16,7 +16,7 @@
 	<div class="css-teamData">
 		<div class="css-teamImage">
 			<figure>
-				<img src=" {{ asset('/image/logo/'~ app.request.attributes.get('categorie')~'/'~ team.logo)}}"
+				<img src=" {{ asset('/image/logo/'~ app.request.attributes.get('categorie')~'/'~ team.logo ~'.svg.png')}}"
 					alt='logo' height="256px" width="256px">
 				<figcaption class='css-teamFigcaptionTrainer'>{{team.name}}</figcaption>
 				<img src="{{asset('/image/trainer/'~ team.trainer ~'.jpeg')}}" alt='trainer' height="256px"

@@ -49,7 +49,7 @@
 									<a
 										href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamHome().sport }) }}">
 										<img style="margin-right:20px"
-											src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}"
+											src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo ~'.svg.png') }}"
 											height="64" width="64"></a>
 									{{ match.getTeamHome().name }}
 									<a class="js-homefav {{match.getTeamHome().id}}"
@@ -86,7 +86,7 @@
 									<a
 										href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamOutside().sport }) }}">
 										<img style="margin-left:20px"
-											src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}"
+											src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo ~'.svg.png') }}"
 											height="64" width="64">
 									</a>
 								</td>
@@ -127,7 +127,7 @@
 										<a
 											href="{{ path('team' , {team : match.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamHome().sport }) }}">
 											<img style="margin-right:20px"
-												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo) }}"
+												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamHome().logo ~'.svg.png') }}"
 												height="64" width="64"></a>
 										{{ match.getTeamHome().name }}
 										<a class="js-homefav {{match.getTeamHome().id}}"
@@ -160,7 +160,7 @@
 										<a
 											href="{{ path('team' , {team : match.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : match.getTeamOutside().sport }) }}">
 											<img style="margin-left:20px"
-												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo) }}"
+												src="{{ asset('image/logo/'~ match.sport ~'/'~ match.getTeamOutside().logo ~'.svg.png') }}"
 												height="64" width="64">
 										</a>
 									</td>
@@ -192,7 +192,7 @@
 										<a
 											href="{{ path('team' , {team : fav.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : fav.getTeamHome().sport }) }}">
 											<img style="margin-right:20px"
-												src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamHome().logo) }}"
+												src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamHome().logo ~'.svg.png') }}"
 												height="64" width="64"></a>
 										{{ fav.getTeamHome().name }}
 										<a class="js-homefav {{fav.getTeamHome().id}}"
@@ -225,7 +225,7 @@
 										<a
 											href="{{ path('team' , {team : fav.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : fav.getTeamOutside().sport }) }}">
 											<img style="margin-left:20px"
-												src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamOutside().logo) }}"
+												src="{{ asset('image/logo/'~ fav.sport ~'/'~ fav.getTeamOutside().logo ~'.svg.png') }}"
 												height="64" width="64">
 										</a>
 									</td>

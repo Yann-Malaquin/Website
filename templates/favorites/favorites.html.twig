@@ -74,7 +74,7 @@
 									<a
 										href="{{ path('team' , {team : meeting.getTeamHome().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
 										<img style="margin-right:20px"
-											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamHome().logo) }}"
+											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamHome().logo ~'.svg.png') }}"
 											height="64" width="64"></a>
 									{{ meeting.getTeamHome().name }}
 								</td>
@@ -94,7 +94,7 @@
 									<a
 										href="{{ path('team' , {team : meeting.getTeamOutside().abbreviation , city : app.request.attributes.get('city'),categorie : sport.sport }) }}">
 										<img style="margin-left:20px"
-											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamOutside().logo) }}"
+											src="{{ asset('image/logo/'~ sport.sport ~'/'~ meeting.getTeamOutside().logo ~'.svg.png') }}"
 											height="64" width="64">
 									</a>
 								</td>
